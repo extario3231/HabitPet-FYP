@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Choosepet extends AppCompatActivity {
     ArrayList<PetModel> petModels = new ArrayList<>();
 
-    int[] petImages = {R.drawable.dog,R.drawable.cat,R.drawable.bd,R.drawable.bd};
+    int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd,R.drawable.bd};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

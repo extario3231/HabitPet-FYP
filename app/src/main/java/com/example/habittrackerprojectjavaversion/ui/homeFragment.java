@@ -178,7 +178,7 @@ public class homeFragment extends Fragment {
             public void onClick(View v){
                 pgBar.setProgress(pgBar.getProgress()+10);
                 if (pgBar.getProgress() >= 100){
-                    imageView.setImageResource(R.drawable.dog);
+                    imageView.setImageResource(R.drawable.cat);
                     pgBar.setProgress(0);
                 }
             }
@@ -189,8 +189,8 @@ public class homeFragment extends Fragment {
             public void onClick(View v){
                 pgBar.setProgress(pgBar.getProgress()-10);
                 if (pgBar.getProgress() <= 0){
-                    imageView.setImageResource(R.drawable.cat);
-                    pgBar.setProgress(0);
+                    imageView.setImageResource(R.drawable.testingimage);
+                    pgBar.setProgress(100);
                 }
             }
         });
