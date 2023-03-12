@@ -1,7 +1,10 @@
-package com.example.habittrackerprojectjavaversion.data;
+package com.example.habittrackerprojectjavaversion.data.entity;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
+
+import com.example.habittrackerprojectjavaversion.data.entity.Habit;
+import com.example.habittrackerprojectjavaversion.data.entity.Task;
 
 import java.util.List;
 

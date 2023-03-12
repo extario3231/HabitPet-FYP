@@ -1,4 +1,4 @@
-package com.example.habittrackerprojectjavaversion.data;
+package com.example.habittrackerprojectjavaversion.data.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

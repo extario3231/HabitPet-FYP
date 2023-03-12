@@ -1,4 +1,4 @@
-package com.example.habittrackerprojectjavaversion.data;
+package com.example.habittrackerprojectjavaversion.data.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
+
+import com.example.habittrackerprojectjavaversion.data.entity.HabitAndTasks;
+import com.example.habittrackerprojectjavaversion.data.entity.Task;
 
 import java.util.List;
 

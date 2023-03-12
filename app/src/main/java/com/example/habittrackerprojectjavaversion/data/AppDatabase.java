@@ -6,13 +6,23 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Habit.class, PetProgress.class, Task.class}, version = 1)
+import com.example.habittrackerprojectjavaversion.data.dao.BuiltinHabitDao;
+import com.example.habittrackerprojectjavaversion.data.dao.HabitDao;
+import com.example.habittrackerprojectjavaversion.data.dao.PetProgressDao;
+import com.example.habittrackerprojectjavaversion.data.dao.TaskDao;
+import com.example.habittrackerprojectjavaversion.data.entity.BuiltinHabit;
+import com.example.habittrackerprojectjavaversion.data.entity.Habit;
+import com.example.habittrackerprojectjavaversion.data.entity.PetProgress;
+import com.example.habittrackerprojectjavaversion.data.entity.Task;
+
+@Database(entities = {Habit.class, PetProgress.class, Task.class, BuiltinHabit.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
     public abstract HabitDao habitDao();
     public abstract PetProgressDao petProgressDao();
     public abstract TaskDao taskDao();
+    public abstract BuiltinHabitDao builtinHabitDao();
 
     public static AppDatabase getDatabase(Context context) {
         if (instance == null)

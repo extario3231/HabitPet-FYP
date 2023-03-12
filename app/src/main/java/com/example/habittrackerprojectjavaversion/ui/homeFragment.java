@@ -21,7 +21,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.habittrackerprojectjavaversion.R;
-import com.example.habittrackerprojectjavaversion.data.PetProgressRepo;
+import com.example.habittrackerprojectjavaversion.data.repo.PetProgressRepo;
 import com.example.habittrackerprojectjavaversion.data.SummaryNameMapping;
 
 import java.util.ArrayList;
@@ -123,12 +123,13 @@ public class homeFragment extends Fragment {
                 handler.post(() -> progressBar.setProgress(newProgress));
                 setIsTaskCompleted(false);
 
-                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
-                            p.setProgress(newProgress);
-                            progressRepo.update(p);
-                        }, err -> Log.e(TAG, "update progress error", err)
-                );
-                compositeDisposable.add(updateProgress);
+                // For storing progress
+//                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
+//                            p.setProgress(newProgress);
+//                            progressRepo.update(p);
+//                        }, err -> Log.e(TAG, "update progress error", err)
+//                );
+//                compositeDisposable.add(updateProgress);
 //                if (newProgress < currentProgress) {
 //                    progress.setImageId();
 //                }

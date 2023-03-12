@@ -1,6 +1,10 @@
-package com.example.habittrackerprojectjavaversion.data;
+package com.example.habittrackerprojectjavaversion.data.repo;
 
 import android.os.Looper;
+
+import com.example.habittrackerprojectjavaversion.data.AppDatabase;
+import com.example.habittrackerprojectjavaversion.data.dao.PetProgressDao;
+import com.example.habittrackerprojectjavaversion.data.entity.PetProgress;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;

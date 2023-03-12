@@ -1,6 +1,11 @@
-package com.example.habittrackerprojectjavaversion.data;
+package com.example.habittrackerprojectjavaversion.data.repo;
 
 import android.os.Looper;
+
+import com.example.habittrackerprojectjavaversion.data.AppDatabase;
+import com.example.habittrackerprojectjavaversion.data.entity.HabitAndTasks;
+import com.example.habittrackerprojectjavaversion.data.dao.TaskDao;
+import com.example.habittrackerprojectjavaversion.data.entity.Task;
 
 import java.util.List;
 
