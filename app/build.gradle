@@ -35,6 +35,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation project(path: ':app')
     compileOnly 'com.google.android.wearable:wearable:2.9.0'
     implementation 'com.applandeo:material-calendar-view:1.7.0' // calendar
 
@@ -44,5 +45,5 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

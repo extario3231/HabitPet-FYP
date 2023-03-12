@@ -18,9 +18,15 @@ import com.example.habittrackerprojectjavaversion.data.AppDatabase;
 import com.example.habittrackerprojectjavaversion.data.Habit;
 import com.example.habittrackerprojectjavaversion.data.HabitDao;
 import com.example.habittrackerprojectjavaversion.data.HabitRepo;
+import com.example.habittrackerprojectjavaversion.data.PetProgress;
 import com.example.habittrackerprojectjavaversion.data.PetProgressDao;
+import com.example.habittrackerprojectjavaversion.data.PetProgressRepo;
+import com.example.habittrackerprojectjavaversion.data.Task;
+import com.example.habittrackerprojectjavaversion.data.TaskRepo;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Completable;
 
 public class MainActivity extends Activity {
     private ImageView myImageView;
@@ -41,8 +47,6 @@ public class MainActivity extends Activity {
         myImageView.startAnimation(animation);
 
         db = AppDatabase.getDatabase(getApplicationContext());
-
-        HabitRepo habitRepo = new HabitRepo(db);
     }
 
     private void initViews() {

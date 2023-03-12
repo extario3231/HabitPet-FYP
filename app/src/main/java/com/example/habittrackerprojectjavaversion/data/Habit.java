@@ -1,5 +1,6 @@
 package com.example.habittrackerprojectjavaversion.data;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -7,25 +8,30 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "habit")
 public class Habit {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
+    @NonNull
     private String name;
-    private String date;
-    @ColumnInfo(name = "all_tasks_completed")
-    private Character areAllTasksCompleted;
+    @NonNull
+    @ColumnInfo(name = "start_date")
+    private String startDate;
+    @NonNull
+    @ColumnInfo(name = "all_tasks_completed", defaultValue = "N")
+    private String areAllTasksCompleted;
+    @ColumnInfo(name = "image_id")
     private int imageId;
 
-    public Habit(String name, String date, Character areAllTasksCompleted, int imageId) {
+    public Habit(String name, String startDate, String areAllTasksCompleted, int imageId) {
         this.name = name;
-        this.date = date;
+        this.startDate = startDate;
         this.areAllTasksCompleted = areAllTasksCompleted;
         this.imageId = imageId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -37,19 +43,19 @@ public class Habit {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public Character getAreAllTasksCompleted() {
+    public String getAreAllTasksCompleted() {
         return areAllTasksCompleted;
     }
 
-    public void setAreAllTasksCompleted(Character areAllTasksCompleted) {
+    public void setAreAllTasksCompleted(String areAllTasksCompleted) {
         this.areAllTasksCompleted = areAllTasksCompleted;
     }
 

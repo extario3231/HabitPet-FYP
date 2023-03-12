@@ -1,12 +1,14 @@
 package com.example.habittrackerprojectjavaversion.data;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "pet_progress")
 public class PetProgress {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
+    @ColumnInfo(name = "image_id")
     private int imageId;
     private int progress;
 
@@ -15,11 +17,11 @@ public class PetProgress {
         this.progress = progress;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

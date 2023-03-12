@@ -20,10 +20,10 @@ public interface HabitDao {
     @Query("SELECT * FROM habit WHERE all_tasks_completed = 'Y'")
     List<Habit> getAllByAllTaskCompletion();
 
-    @Query("SELECT * FROM habit WHERE date = :date")
+    @Query("SELECT * FROM habit WHERE start_date = :date")
     List<Habit> findByDate(String date);
 
-    @Query("SELECT * FROM habit WHERE date BETWEEN :startDate AND :endDate")
+    @Query("SELECT * FROM habit WHERE start_date BETWEEN :startDate AND :endDate")
     List<Habit> findByPeriod(String startDate, String endDate);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -34,6 +34,9 @@ public interface HabitDao {
 
     @Delete
     void delete(Habit habit);
+
+    @Query("DELETE FROM habit WHERE id = :id")
+    void deleteById(int id);
 
     @Update
     void update(Habit habit);
