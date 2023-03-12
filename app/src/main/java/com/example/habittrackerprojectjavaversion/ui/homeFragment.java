@@ -1,12 +1,13 @@
 package com.example.habittrackerprojectjavaversion.ui;
 
-import static com.example.habittrackerprojectjavaversion.ui.MainActivity.getPetProgressDao;
+import static com.example.habittrackerprojectjavaversion.ui.MainActivity.getDb;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskCompleted;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTaskCompleted;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,13 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.habittrackerprojectjavaversion.R;
-import com.example.habittrackerprojectjavaversion.data.PetProgress;
-import com.example.habittrackerprojectjavaversion.data.PetProgressDao;
+import com.example.habittrackerprojectjavaversion.data.PetProgressRepo;
 import com.example.habittrackerprojectjavaversion.data.SummaryNameMapping;
 
 import java.util.ArrayList;
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 
 /**
@@ -61,7 +64,10 @@ public class homeFragment extends Fragment {
 
     ArrayList<SummaryNameMapping> showhabitlist = new ArrayList<>();
     private summary habitlist;
-    private PetProgressDao petProgressDao = getPetProgressDao();
+    private PetProgressRepo progressRepo = new PetProgressRepo(getDb());
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    private static final String TAG = "HomeFragment";
 
     public homeFragment() {
         // Required empty public constructor
@@ -117,12 +123,15 @@ public class homeFragment extends Fragment {
                 handler.post(() -> progressBar.setProgress(newProgress));
                 setIsTaskCompleted(false);
 
-                PetProgress progress = petProgressDao.getProgress();
-                progress.setProgress(newProgress);
+                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
+                            p.setProgress(newProgress);
+                            progressRepo.update(p);
+                        }, err -> Log.e(TAG, "update progress error", err)
+                );
+                compositeDisposable.add(updateProgress);
 //                if (newProgress < currentProgress) {
 //                    progress.setImageId();
 //                }
-                petProgressDao.updateProgress(progress);
             }
         }).start();
 
@@ -194,5 +203,11 @@ public class homeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
     }
 }

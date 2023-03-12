@@ -17,6 +17,7 @@ import com.example.habittrackerprojectjavaversion.R;
 import com.example.habittrackerprojectjavaversion.data.AppDatabase;
 import com.example.habittrackerprojectjavaversion.data.Habit;
 import com.example.habittrackerprojectjavaversion.data.HabitDao;
+import com.example.habittrackerprojectjavaversion.data.HabitRepo;
 import com.example.habittrackerprojectjavaversion.data.PetProgressDao;
 
 import java.util.List;
@@ -24,8 +25,6 @@ import java.util.List;
 public class MainActivity extends Activity {
     private ImageView myImageView;
     private static AppDatabase db;
-    private static HabitDao habitDao;
-    private static PetProgressDao petProgressDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,8 @@ public class MainActivity extends Activity {
         myImageView.startAnimation(animation);
 
         db = AppDatabase.getDatabase(getApplicationContext());
-        habitDao = db.habitDao();
-        petProgressDao = db.petProgressDao();
+
+        HabitRepo habitRepo = new HabitRepo(db);
     }
 
     private void initViews() {
@@ -71,13 +70,5 @@ public class MainActivity extends Activity {
 
     public static AppDatabase getDb() {
         return db;
-    }
-
-    public static HabitDao getHabitDao() {
-        return habitDao;
-    }
-
-    public static PetProgressDao getPetProgressDao() {
-        return petProgressDao;
     }
 }
