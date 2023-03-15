@@ -1,13 +1,22 @@
 package com.example.habittrackerprojectjavaversion.ui;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.ALARM_SERVICE;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.annimon.stream.internal.Compat;
 import com.example.habittrackerprojectjavaversion.R;
 import com.example.habittrackerprojectjavaversion.data.NameMapping;
 
@@ -96,7 +106,6 @@ public class taskFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -105,8 +114,6 @@ public class taskFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_task, container, false);
-
-
 
         return view;
     }
@@ -167,6 +174,21 @@ public class taskFragment extends Fragment {
                 ListView listView = getView().findViewById(R.id.listtask);
                 listView.setTextFilterEnabled(true);
                 listView.setAdapter(adapter);
+
+                // notification
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(channel);
+                }
+                NotificationCompat.Builder builder2 = new NotificationCompat.Builder(getActivity(), "notifyUser");
+                builder2.setContentTitle("Hey")
+                        .setContentText("I am hungry")
+                        .setSmallIcon(R.drawable.cat)
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
+                notificationManagerCompat.notify(1, builder2.build());
             }
         });
         builder1.setNegativeButton("Cancel", null);
@@ -193,6 +215,7 @@ public class taskFragment extends Fragment {
                 imageChooser();
             }
         });
+
         addHabitText = view.findViewById(R.id.addHabit);
         addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +229,22 @@ public class taskFragment extends Fragment {
                 ListView listView = getView().findViewById(R.id.listtask);
                 listView.setTextFilterEnabled(true);
                 listView.setAdapter(adapter);
+
+                // notification
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+                    notificationManager.createNotificationChannel(channel);
+                }
+                NotificationCompat.Builder builder2 = new NotificationCompat.Builder(getActivity(), "notifyUser");
+                builder2.setContentTitle("Hey")
+                        .setContentText("I am hungry")
+                        .setSmallIcon(R.drawable.cat)
+                        .setAutoCancel(true);
+
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
+                notificationManagerCompat.notify(1, builder2.build());
+
             }
         });
 
@@ -242,7 +281,6 @@ public class taskFragment extends Fragment {
         //tick & cross not working now
 
     }
-
     public static boolean getIsTaskCompleted() {
         return isTaskCompleted;
     }
@@ -286,4 +324,5 @@ public class taskFragment extends Fragment {
             }
         }
     }
+
 }
