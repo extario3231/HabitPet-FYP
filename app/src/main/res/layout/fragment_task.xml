@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/add"
         android:layout_width="400dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:background="@drawable/buttonstyle1"
         android:text="@string/Addyourownhabit"
         android:textAllCaps="false"
@@ -46,9 +46,25 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.936" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/refresh"
+        />
+
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyle2"
+        android:src="@drawable/refresh"
+        android:text="@string/space"
+       />
+
     <Button
         android:id="@+id/re"
-        android:layout_width="150dp"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonstyle3"
         android:text="@string/recommendation"
@@ -58,5 +74,8 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

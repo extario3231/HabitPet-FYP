@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,21 +46,21 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
             image.setImageResource(currentName.getImageResId());
         }
 
-        /*CheckBox addToFavorite = listItemView.findViewById(R.id.favoritecheckbox);
-        addToFavorite.setChecked(currentName.isFavorite());
-        /*addToFavorite.setOnCheckedChangeListener(
-                new CheckBox.OnCheckedChangeListener(){
-                    public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                        currentName.toggleFavorite();
-                    }
-                }
-        );*/
+        Button button = listItemView.findViewById(R.id.remove);
+        //button.setOnClickListener(new ItemButton_Click(position));
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentName.NFavorite();
+            }
+        });
+
 
         ImageButton tickbutton = (ImageButton) listItemView.findViewById(R.id.tick);
         tickbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "You gained 5 EXP for your pet!",
+                Toast.makeText(getContext(), "You gained 30 EXP for your pet!",
                         Toast.LENGTH_SHORT).show();
                 setIsTaskCompleted(true);
             }
@@ -70,3 +71,4 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
 
 
 }
+

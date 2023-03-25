@@ -36,6 +36,10 @@ public class NameMapping {
         return isFavorite;
     }
 
+    public void NFavorite() {
+        isFavorite = false;
+    }
+
     public void toggleFavorite() {
         isFavorite = true;
     }

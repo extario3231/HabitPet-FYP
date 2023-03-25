@@ -22,4 +22,11 @@
     </string-array>
     <string name="Addyourownhabit">Add you own habit</string>
     <string name="recommendation">Recommendation</string>
+    <string name="reminder_time_key">reminder_time</string>
+    <string name="daily">Daily</string>
+    <string name="twoday">Two Days</string>
+    <string name="Weekly">Weekly</string>
+    <string name="refresh">Refresh</string>
+    <string name="space"> </string>
+    <string name="settimemessage">Select your time period for reminding your chose habits </string>
 </resources>

@@ -60,6 +60,8 @@ public class taskFragment extends Fragment {
     Button button;
     Button buttonre;
 
+    Button buttomrefresh;
+
     ImageButton tickbutton;
     ImageButton crossbutton;
     ProgressBar expbar;
@@ -189,6 +191,9 @@ public class taskFragment extends Fragment {
 
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
                 notificationManagerCompat.notify(1, builder2.build());
+
+                Intent intentnoti = new Intent(getActivity(),SetTime.class);
+                startActivity(intentnoti);
             }
         });
         builder1.setNegativeButton("Cancel", null);
@@ -242,8 +247,14 @@ public class taskFragment extends Fragment {
                         .setSmallIcon(R.drawable.cat)
                         .setAutoCancel(true);
 
+
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
                 notificationManagerCompat.notify(1, builder2.build());
+
+                Intent intentnoti = new Intent(getActivity(),SetTime.class);
+                startActivity(intentnoti);
+
+
 
             }
         });
@@ -278,6 +289,17 @@ public class taskFragment extends Fragment {
             }
         });
 
+        buttomrefresh = getView().findViewById(R.id.refresh);
+        buttomrefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                habitlist.setSelection("favourite");
+                HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
+                ListView listView = getView().findViewById(R.id.listtask);
+                listView.setTextFilterEnabled(true);
+                listView.setAdapter(adapter);
+            }
+        });
         //tick & cross not working now
 
     }
