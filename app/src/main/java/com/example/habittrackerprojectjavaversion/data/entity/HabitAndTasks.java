@@ -3,16 +3,18 @@ package com.example.habittrackerprojectjavaversion.data.entity;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
-import com.example.habittrackerprojectjavaversion.data.entity.Habit;
-import com.example.habittrackerprojectjavaversion.data.entity.Task;
-
 import java.util.List;
 
 public class HabitAndTasks {
     @Embedded
     private Habit habit;
-    @Relation(parentColumn = "id", entityColumn = "habit_id")
+    @Relation(parentColumn = "habit_id", entityColumn = "habit_task_id")
     private List<Task> tasks;
+
+    public HabitAndTasks(Habit habit, List<Task> tasks) {
+        this.habit = habit;
+        this.tasks = tasks;
+    }
 
     public Habit getHabit() {
         return habit;

@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "habit")
 public class Habit {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    @ColumnInfo(name = "habit_id")
+    private long habitId;
     @NonNull
     private String name;
     @NonNull
@@ -27,12 +28,12 @@ public class Habit {
         this.imageId = imageId;
     }
 
-    public long getId() {
-        return id;
+    public long getHabitId() {
+        return habitId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setHabitId(long habitId) {
+        this.habitId = habitId;
     }
 
     public String getName() {

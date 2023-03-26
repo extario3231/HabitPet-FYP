@@ -1,13 +1,15 @@
 package com.example.habittrackerprojectjavaversion.data.entity;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "builtin_habit")
 public class BuiltinHabit {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    @ColumnInfo(name = "builtin_habit_id")
+    private long builtinHabitId;
     @NonNull
     private String name;
 
@@ -15,12 +17,12 @@ public class BuiltinHabit {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
+    public long getBuiltinHabitId() {
+        return builtinHabitId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setBuiltinHabitId(long builtinHabitId) {
+        this.builtinHabitId = builtinHabitId;
     }
 
     public String getName() {

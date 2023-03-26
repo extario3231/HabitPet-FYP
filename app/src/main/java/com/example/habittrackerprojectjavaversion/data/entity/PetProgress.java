@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "pet_progress")
 public class PetProgress {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    @ColumnInfo(name = "progress_id")
+    private long progressId;
     @ColumnInfo(name = "image_id")
     private int imageId;
     private int progress;
@@ -17,12 +18,12 @@ public class PetProgress {
         this.progress = progress;
     }
 
-    public long getId() {
-        return id;
+    public long getProgressId() {
+        return progressId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProgressId(long progressId) {
+        this.progressId = progressId;
     }
 
     public int getImageId() {
