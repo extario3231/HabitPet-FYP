@@ -10,7 +10,7 @@ import com.example.habittrackerprojectjavaversion.data.entity.PetProgress;
 @Dao
 public interface PetProgressDao {
     @Query("SELECT * FROM pet_progress")
-    PetProgress getProgress();
+    PetProgress findProgress();
 
     @Insert
     void insert(PetProgress progress);

@@ -14,13 +14,13 @@ import java.util.List;
 @Dao
 public interface HabitDao {
     @Query("SELECT * FROM habit")
-    List<Habit> getAll();
+    List<Habit> findAll();
 
     @Query("SELECT * FROM habit WHERE name = :name")
-    Habit getByName(String name);
+    Habit findByName(String name);
 
     @Query("SELECT * FROM habit WHERE all_tasks_completed = 'Y'")
-    List<Habit> getAllByAllTaskCompletion();
+    List<Habit> findByAllTaskCompletion();
 
     @Query("SELECT * FROM habit WHERE start_date = :date")
     List<Habit> findByDate(String date);
@@ -32,12 +32,12 @@ public interface HabitDao {
     void insertAll(List<Habit> habits);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Habit habit);
+    long insert(Habit habit);
 
     @Delete
     void delete(Habit habit);
 
-    @Query("DELETE FROM habit WHERE id = :id")
+    @Query("DELETE FROM habit WHERE habit_id = :id")
     void deleteById(int id);
 
     @Update

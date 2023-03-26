@@ -17,8 +17,8 @@ public interface BuiltinHabitDao {
     void insertAll(List<BuiltinHabit> habits);
 
     @Query("SELECT * FROM builtin_habit")
-    List<BuiltinHabit> getAll();
+    List<BuiltinHabit> findAll();
 
     @Query("SELECT * FROM builtin_habit WHERE name = :name")
-    BuiltinHabit getByName(String name);
+    BuiltinHabit findByName(String name);
 }
