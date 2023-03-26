@@ -21,12 +21,12 @@ public class BuiltinHabitRepo {
     }
 
     public Single<List<BuiltinHabit>> getAll() {
-        return Single.just(builtinHabitDao.getAll()).subscribeOn(Schedulers.io())
+        return Single.just(builtinHabitDao.findAll()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
     public Single<BuiltinHabit> getByName(String name) {
-        return Single.just(builtinHabitDao.getByName(name)).subscribeOn(Schedulers.io())
+        return Single.just(builtinHabitDao.findByName(name)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 

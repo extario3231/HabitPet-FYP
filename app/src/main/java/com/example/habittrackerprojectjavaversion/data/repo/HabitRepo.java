@@ -21,7 +21,7 @@ public class HabitRepo {
     }
 
     public Single<List<Habit>> getAll() {
-        return Single.just(habitDao.getAll()).subscribeOn(Schedulers.io())
+        return Single.just(habitDao.findAll()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
@@ -31,7 +31,7 @@ public class HabitRepo {
     }
 
     public Single<Habit> getByName(String name) {
-        return Single.just(habitDao.getByName(name)).subscribeOn(Schedulers.io())
+        return Single.just(habitDao.findByName(name)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
@@ -41,7 +41,7 @@ public class HabitRepo {
     }
 
     public Single<List<Habit>> getAllByAllTaskCompletion() {
-        return Single.just(habitDao.getAllByAllTaskCompletion()).subscribeOn(Schedulers.io())
+        return Single.just(habitDao.findByAllTaskCompletion()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
