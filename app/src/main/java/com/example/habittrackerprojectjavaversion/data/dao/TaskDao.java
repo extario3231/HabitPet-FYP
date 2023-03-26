@@ -16,11 +16,14 @@ import java.util.List;
 @Dao
 public interface TaskDao {
     @Query("SELECT * FROM task")
-    List<Task> getAll();
+    List<Task> findAll();
 
     @Transaction
     @Query("SELECT * FROM habit WHERE name = :habitName")
-    List<HabitAndTasks> getByHabit(String habitName);
+    List<HabitAndTasks> findByHabit(String habitName);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void addTasks(List<Task> tasks);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addTask(Task task);

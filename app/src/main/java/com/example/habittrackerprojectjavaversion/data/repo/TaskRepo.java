@@ -22,12 +22,17 @@ public class TaskRepo {
     }
 
     public Single<List<Task>> getAll() {
-        return Single.just(taskDao.getAll()).subscribeOn(Schedulers.io())
+        return Single.just(taskDao.findAll()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
     public Single<List<HabitAndTasks>> getByHabit(String habitName) {
-        return Single.just(taskDao.getByHabit(habitName)).subscribeOn(Schedulers.io())
+        return Single.just(taskDao.findByHabit(habitName)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
+    }
+
+    public Completable addTasks(List<Task> tasks) {
+        return Completable.fromAction(() -> taskDao.addTasks(tasks)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
