@@ -84,31 +84,4 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:layout_constraintVertical_bias="0.937" />
 
-    <Button
-        android:id="@+id/addExpbutton"
-        android:layout_width="162dp"
-        android:layout_height="43dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/buttonstyle1"
-        android:text="Done"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/choosebutton"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/loseExpbutton"
-        android:layout_width="164dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/buttonstyle1"
-        android:text="Fail"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/choosebutton"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,6 +53,7 @@ public class taskFragment extends Fragment {
 
     public habits habitlist;
     private static boolean isTaskCompleted;
+    private static boolean isTaskFailed;
 
     // self-defined variables
     AlertDialog dialog;
@@ -306,10 +307,11 @@ public class taskFragment extends Fragment {
     public static boolean getIsTaskCompleted() {
         return isTaskCompleted;
     }
-
     public static void setIsTaskCompleted(boolean value) {
         isTaskCompleted = value;
     }
+    public static boolean getIsTaskFailed(){ return isTaskFailed; }
+    public static void setIsTaskFailed(boolean value){ isTaskFailed = value; }
 
     // this function is triggered when
     // the Select Image Button is clicked

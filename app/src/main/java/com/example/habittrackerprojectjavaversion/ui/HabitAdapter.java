@@ -52,6 +52,8 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
             @Override
             public void onClick(View v) {
                 currentName.NFavorite();
+                Toast.makeText(getContext(), "You lost 30 EXP for your pet!",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

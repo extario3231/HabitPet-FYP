@@ -2,7 +2,9 @@ package com.example.habittrackerprojectjavaversion.ui;
 
 import static com.example.habittrackerprojectjavaversion.ui.MainActivity.getDb;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskCompleted;
+import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskFailed;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTaskCompleted;
+import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTaskFailed;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,7 +70,7 @@ public class homeFragment extends Fragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private static final String TAG = "HomeFragment";
-
+    int petLv = 0;
     public homeFragment() {
         // Required empty public constructor
     }
@@ -115,14 +117,34 @@ public class homeFragment extends Fragment {
         listView.setTextFilterEnabled(true);
         listView.setAdapter(adapter);
 
-        ProgressBar progressBar = view.findViewById(R.id.determinateBar);
-        new Thread(() -> {
-            if (getIsTaskCompleted()) {
-                int currentProgress = progressBar.getProgress();
-                int newProgress = currentProgress + 10;
-                handler.post(() -> progressBar.setProgress(newProgress));
-                setIsTaskCompleted(false);
+        pgBar = view.findViewById(R.id.determinateBar);
+        imageView = view.findViewById(R.id.petImageView);
+        Thread thread1 = new Thread(() -> {
+            if(petLv == 0){
+                handler.post(() -> imageView.setImageResource(R.drawable.testingimage));
+            }
+            else if(petLv >= 1){
+                handler.post(() -> imageView.setImageResource(R.drawable.cat));
+            }
+        });
 
+        Thread thread2 = new Thread(() -> {
+            if (getIsTaskCompleted()) {
+                int currentProgress = pgBar.getProgress();
+                if(currentProgress >= 100){
+                    handler.post(() -> pgBar.setProgress(0));
+                    petLv += 1;
+                }
+                else{
+                    handler.post(() -> pgBar.setProgress(currentProgress+50));
+                }
+                setIsTaskCompleted(false);
+                if(petLv == 0){
+                    imageView.setImageResource(R.drawable.testingimage);
+                }
+                else if(petLv >= 1){
+                    imageView.setImageResource(R.drawable.cat);
+                }
                 // For storing progress
 //                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
 //                            p.setProgress(newProgress);
@@ -134,11 +156,13 @@ public class homeFragment extends Fragment {
 //                    progress.setImageId();
 //                }
             }
-        }).start();
+        });
+
+        thread1.start();
+        thread2.start();
 
         return view;
     }
-
 
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -174,34 +198,6 @@ public class homeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CalendarDisplay.class);
                 startActivity(intent);
-            }
-        });
-
-        // add or deduct exp and pet level up
-        doneButton = (Button) getView().findViewById(R.id.addExpbutton);
-        failButton = (Button) getView().findViewById(R.id.loseExpbutton);
-        pgBar = (ProgressBar) getView().findViewById(R.id.determinateBar);
-        imageView = getView().findViewById(R.id.petImageView);
-
-        doneButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                pgBar.setProgress(pgBar.getProgress()+10);
-                if (pgBar.getProgress() >= 100){
-                    imageView.setImageResource(R.drawable.cat);
-                    pgBar.setProgress(0);
-                }
-            }
-        });
-
-        failButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                pgBar.setProgress(pgBar.getProgress()-10);
-                if (pgBar.getProgress() <= 0){
-                    imageView.setImageResource(R.drawable.testingimage);
-                    pgBar.setProgress(100);
-                }
             }
         });
     }
