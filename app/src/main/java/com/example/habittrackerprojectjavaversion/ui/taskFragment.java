@@ -180,13 +180,13 @@ public class taskFragment extends Fragment {
 
                 // notification
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_HIGH);
                     NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
                     notificationManager.createNotificationChannel(channel);
                 }
                 NotificationCompat.Builder builder2 = new NotificationCompat.Builder(getActivity(), "notifyUser");
-                builder2.setContentTitle("Hey")
-                        .setContentText("I am hungry")
+                builder2.setContentTitle("Message")
+                        .setContentText("Your habits have been set up!")
                         .setSmallIcon(R.drawable.cat)
                         .setAutoCancel(true);
 
@@ -238,13 +238,13 @@ public class taskFragment extends Fragment {
 
                 // notification
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_DEFAULT);
+                    NotificationChannel channel = new NotificationChannel("notifyUser", "notifyUser", NotificationManager.IMPORTANCE_HIGH);
                     NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
                     notificationManager.createNotificationChannel(channel);
                 }
                 NotificationCompat.Builder builder2 = new NotificationCompat.Builder(getActivity(), "notifyUser");
-                builder2.setContentTitle("Hey")
-                        .setContentText("I am hungry")
+                builder2.setContentTitle("Message")
+                        .setContentText("Your habits have been set")
                         .setSmallIcon(R.drawable.cat)
                         .setAutoCancel(true);
 

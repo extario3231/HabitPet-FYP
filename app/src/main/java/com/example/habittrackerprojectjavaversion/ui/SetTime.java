@@ -84,9 +84,9 @@ public class SetTime extends AppCompatActivity {
 
     private void notification_cannel(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            CharSequence name = "Reminder";
-            String description = "Reminder Notification";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            CharSequence name = "Hey! I am hungry!";
+            String description = "Finish the task and feed me!";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("Notification",name,importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);

@@ -21,9 +21,9 @@ public class broadcast_receiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,repeating_intent,PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"Notification")
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("Reminder")
-                .setContentText("Reminder Notification")
+                .setSmallIcon(R.drawable.cat)
+                .setContentTitle("Hey! I am hungry!")
+                .setContentText("Finish the task and feed me!")
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);

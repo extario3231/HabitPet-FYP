@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/default_text_view"
-        android:layout_width="157dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="Sleep and wake up" />
 
@@ -29,13 +29,13 @@
 
     <TextView
         android:id="@+id/blank"
-        android:layout_width="60dp"
+        android:layout_width="10dp"
         android:layout_height="wrap_content"
         android:text="" />
 
     <Button
         android:id="@+id/remove"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:background="@drawable/buttonstyle4"
         android:text="Remove"
