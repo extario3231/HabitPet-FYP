@@ -63,10 +63,6 @@ public class taskFragment extends Fragment {
 
     Button buttomrefresh;
 
-    ImageButton tickbutton;
-    ImageButton crossbutton;
-    ProgressBar expbar;
-
     ArrayList<NameMapping> showhabitlist = new ArrayList<NameMapping>();
     //private habits habitlist;
 

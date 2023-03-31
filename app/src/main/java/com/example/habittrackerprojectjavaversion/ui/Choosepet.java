@@ -4,26 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.habittrackerprojectjavaversion.R;
 import com.example.habittrackerprojectjavaversion.data.PetModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Choosepet extends AppCompatActivity implements SelectListener {
     ArrayList<PetModel> petModels = new ArrayList<>();
-    ImageView petImageView;
-    Handler handler;
-    int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd,R.drawable.bd};
+    public static boolean isChangeToDog = false;
+    public static boolean isChangeToCat = false;
+    public static boolean isChangeToBird = false;
+
+    int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,26 +42,42 @@ public class Choosepet extends AppCompatActivity implements SelectListener {
             petModels.add(new PetModel(petNames[i],petSounds[i],petImages[i]));
         }
     }
-
-
     @Override
     public void onItemClicked(PetModel petModel) {
         Toast.makeText(this,"You are successfully changed to " + petModel.getPetname(),Toast.LENGTH_SHORT).show();
 
-        petImageView = (ImageView) findViewById(R.id.petImageView);
-        Thread thread = new Thread(()->{
-            if (petModel.getPetname() == "Dog"){
-                handler.post(()->petImageView.setImageResource(R.drawable.babydog));
-                finish();
-            } else if(petModel.getPetname() == "Cat"){
-                handler.post(()->petImageView.setImageResource(R.drawable.testingimage));
-                finish();
-            } else {
-                handler.post(()->petImageView.setImageResource(R.drawable.babybird));
-                finish();
-            }
-        });
+        if (petModel.getPetname() == "Dog"){
+            setToDog(true);
+        } else if(petModel.getPetname() == "Cat"){
+            setToCat(true);
+        } else{
+            setToBird(true);
+        }
+        finish();
+    }
 
-        thread.start();
+    public static void setToDog(boolean value){
+        isChangeToDog = value;
+        isChangeToCat = false;
+        isChangeToBird = false;
+    }
+    public static boolean getToDog(){
+        return isChangeToDog;
+    }
+    public static void setToCat(boolean value){
+        isChangeToCat = value;
+        isChangeToBird = false;
+        isChangeToDog = false;
+    }
+    public static boolean getToCat(){
+        return isChangeToCat;
+    }
+    public static void setToBird(boolean value){
+        isChangeToBird = value;
+        isChangeToDog = false;
+        isChangeToCat = false;
+    }
+    public static boolean getToBird(){
+        return isChangeToBird;
     }
 }

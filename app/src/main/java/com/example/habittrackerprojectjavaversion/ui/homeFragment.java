@@ -1,5 +1,9 @@
 package com.example.habittrackerprojectjavaversion.ui;
 
+import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToBird;
+import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToCat;
+import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToDog;
+import static com.example.habittrackerprojectjavaversion.ui.Choosepet.setToDog;
 import static com.example.habittrackerprojectjavaversion.ui.MainActivity.getDb;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskCompleted;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskFailed;
@@ -57,11 +61,11 @@ public class homeFragment extends Fragment {
     // self-defined parameters
     private TextView quotetv;
     private Button buttonch;
-    private ProgressBar pgBar;
+    public ProgressBar pgBar;
 
     private ArrayList<String> quoteArrayList = new ArrayList<>();
     private ListView listView;
-    private ImageView imageView;
+    public ImageView imageView;
     private Handler handler = new Handler();
 
     ArrayList<SummaryNameMapping> showhabitlist = new ArrayList<>();
@@ -119,12 +123,40 @@ public class homeFragment extends Fragment {
 
         pgBar = view.findViewById(R.id.determinateBar);
         imageView = view.findViewById(R.id.petImageView);
+
+        Thread thread3 = new Thread(() -> {
+            if(getToDog() == true){
+                handler.post(()->imageView.setImageResource(R.drawable.babydog));
+            }
+            else if(getToCat() == true){
+                handler.post(()->imageView.setImageResource(R.drawable.testingimage));
+            }
+            else if(getToBird() == true){
+                handler.post(()->imageView.setImageResource(R.drawable.babybird));
+            }
+        });
         Thread thread1 = new Thread(() -> {
             if(petLv == 0){
-                handler.post(() -> imageView.setImageResource(R.drawable.testingimage));
+                if(getToCat() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.testingimage));
+                }
+                else if(getToBird() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.babybird));
+                }
+                else if(getToDog() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.babydog));
+                }
             }
             else if(petLv >= 1){
-                handler.post(() -> imageView.setImageResource(R.drawable.cat));
+                if(getToCat() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.cat));
+                }
+                else if(getToBird() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.babybird));
+                }
+                else if(getToDog() == true){
+                    handler.post(() -> imageView.setImageResource(R.drawable.dog));
+                }
             }
         });
 
@@ -138,13 +170,31 @@ public class homeFragment extends Fragment {
                 else{
                     handler.post(() -> pgBar.setProgress(currentProgress+50));
                 }
-                setIsTaskCompleted(false);
+
                 if(petLv == 0){
-                    imageView.setImageResource(R.drawable.testingimage);
+                    if(getToCat()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.testingimage));
+                    }
+                    else if(getToDog()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.babydog));
+                    }
+                    else if(getToBird()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.babybird));
+                    }
                 }
                 else if(petLv >= 1){
-                    imageView.setImageResource(R.drawable.cat);
+                    if(getToCat()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.cat));
+                    }
+                    else if(getToDog()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.dog));
+                    }
+                    else if(getToBird()==true){
+                        handler.post(()->imageView.setImageResource(R.drawable.babybird));
+                    }
                 }
+
+                setIsTaskCompleted(false);
                 // For storing progress
 //                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
 //                            p.setProgress(newProgress);
@@ -160,10 +210,10 @@ public class homeFragment extends Fragment {
 
         thread1.start();
         thread2.start();
+        thread3.start();
 
         return view;
     }
-
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
@@ -200,8 +250,6 @@ public class homeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
