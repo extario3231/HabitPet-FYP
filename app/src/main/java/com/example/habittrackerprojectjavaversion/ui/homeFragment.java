@@ -158,9 +158,15 @@ public class homeFragment extends Fragment {
                 int currentProgress = pgBar.getProgress();
                 if(currentProgress >= 100){
                     handler.post(() -> pgBar.setProgress(0));
-                    if(getToDog() == true)dogLv += 1;
-                    else if(getToBird() == true) birdLv+=1;
-                    else if(getToDog() == true) dogLv+=1;
+                    if(getToCat() == true){
+                        catLv += 1;
+                    }
+                    else if(getToBird() == true){
+                        birdLv+=1;
+                    }
+                    else if(getToDog() == true){
+                        dogLv+=1;
+                    }
                 }
                 else{
                     handler.post(() -> pgBar.setProgress(currentProgress+50));
