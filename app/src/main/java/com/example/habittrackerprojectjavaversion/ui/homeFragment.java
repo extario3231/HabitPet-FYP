@@ -132,7 +132,7 @@ public class homeFragment extends Fragment {
                     handler.post(()->imageView.setImageResource(R.drawable.babydog));
                 }
                 else{
-                    handler.post(()->imageView.setImageResource(R.drawable.babydog));
+                    handler.post(()->imageView.setImageResource(R.drawable.dog));
                 }
             }
             else if(getToCat() == true){
