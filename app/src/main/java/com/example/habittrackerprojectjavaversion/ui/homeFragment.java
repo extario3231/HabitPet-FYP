@@ -74,7 +74,9 @@ public class homeFragment extends Fragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private static final String TAG = "HomeFragment";
-    int petLv = 0;
+    int catLv = 0;
+    int dogLv = 0;
+    int birdLv = 0;
     public homeFragment() {
         // Required empty public constructor
     }
@@ -126,36 +128,27 @@ public class homeFragment extends Fragment {
 
         Thread thread3 = new Thread(() -> {
             if(getToDog() == true){
-                handler.post(()->imageView.setImageResource(R.drawable.babydog));
+                if(dogLv == 0){
+                    handler.post(()->imageView.setImageResource(R.drawable.babydog));
+                }
+                else{
+                    handler.post(()->imageView.setImageResource(R.drawable.babydog));
+                }
             }
             else if(getToCat() == true){
-                handler.post(()->imageView.setImageResource(R.drawable.testingimage));
+                if(catLv == 0){
+                    handler.post(()->imageView.setImageResource(R.drawable.testingimage));
+                }
+                else{
+                    handler.post(()->imageView.setImageResource(R.drawable.cat));
+                }
             }
             else if(getToBird() == true){
-                handler.post(()->imageView.setImageResource(R.drawable.babybird));
-            }
-        });
-        Thread thread1 = new Thread(() -> {
-            if(petLv == 0){
-                if(getToCat() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.testingimage));
+                if(birdLv == 0){
+                    handler.post(()->imageView.setImageResource(R.drawable.babybird));
                 }
-                else if(getToBird() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.babybird));
-                }
-                else if(getToDog() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.babydog));
-                }
-            }
-            else if(petLv >= 1){
-                if(getToCat() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.cat));
-                }
-                else if(getToBird() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.babybird));
-                }
-                else if(getToDog() == true){
-                    handler.post(() -> imageView.setImageResource(R.drawable.dog));
+                else{
+                    handler.post(()->imageView.setImageResource(R.drawable.bird));
                 }
             }
         });
@@ -165,33 +158,12 @@ public class homeFragment extends Fragment {
                 int currentProgress = pgBar.getProgress();
                 if(currentProgress >= 100){
                     handler.post(() -> pgBar.setProgress(0));
-                    petLv += 1;
+                    if(getToDog() == true)dogLv += 1;
+                    else if(getToBird() == true) birdLv+=1;
+                    else if(getToDog() == true) dogLv+=1;
                 }
                 else{
                     handler.post(() -> pgBar.setProgress(currentProgress+50));
-                }
-
-                if(petLv == 0){
-                    if(getToCat()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.testingimage));
-                    }
-                    else if(getToDog()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.babydog));
-                    }
-                    else if(getToBird()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.babybird));
-                    }
-                }
-                else if(petLv >= 1){
-                    if(getToCat()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.cat));
-                    }
-                    else if(getToDog()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.dog));
-                    }
-                    else if(getToBird()==true){
-                        handler.post(()->imageView.setImageResource(R.drawable.babybird));
-                    }
                 }
 
                 setIsTaskCompleted(false);
@@ -208,7 +180,6 @@ public class homeFragment extends Fragment {
             }
         });
 
-        thread1.start();
         thread2.start();
         thread3.start();
 

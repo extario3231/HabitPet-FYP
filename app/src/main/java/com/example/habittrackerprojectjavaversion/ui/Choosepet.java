@@ -20,6 +20,7 @@ public class Choosepet extends AppCompatActivity implements SelectListener {
     public static boolean isChangeToBird = false;
 
     int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd};
+    String[] petNames = new String[]{"Dog", "Cat", "Bird"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,6 @@ public class Choosepet extends AppCompatActivity implements SelectListener {
     }
 
     private void setupPetModels(){
-        String[] petNames = getResources().getStringArray(R.array.petname);
         String[] petSounds = getResources().getStringArray(R.array.petsound);
 
         for (int i = 0 ; i < petNames.length;i++){
