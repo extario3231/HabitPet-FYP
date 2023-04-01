@@ -127,29 +127,23 @@ public class homeFragment extends Fragment {
         imageView = view.findViewById(R.id.petImageView);
 
         Thread thread3 = new Thread(() -> {
-            if(getToDog() == true){
-                if(dogLv == 0){
-                    handler.post(()->imageView.setImageResource(R.drawable.babydog));
-                }
-                else{
-                    handler.post(()->imageView.setImageResource(R.drawable.dog));
-                }
+            if(getToDog() == true && dogLv == 0) {
+                handler.post(() -> imageView.setImageResource(R.drawable.babydog));
             }
-            else if(getToCat() == true){
-                if(catLv == 0){
-                    handler.post(()->imageView.setImageResource(R.drawable.testingimage));
-                }
-                else{
-                    handler.post(()->imageView.setImageResource(R.drawable.cat));
-                }
+            else if(getToDog() == true && dogLv > 0){
+                handler.post(()->imageView.setImageResource(R.drawable.dog));
             }
-            else if(getToBird() == true){
-                if(birdLv == 0){
-                    handler.post(()->imageView.setImageResource(R.drawable.babybird));
-                }
-                else{
-                    handler.post(()->imageView.setImageResource(R.drawable.bird));
-                }
+            else if(getToCat() == true && catLv == 0){
+                handler.post(()->imageView.setImageResource(R.drawable.testingimage));
+            }
+            else if(getToCat() == true && catLv > 0){
+                handler.post(()->imageView.setImageResource(R.drawable.cat));
+            }
+            else if(getToBird() == true && birdLv == 0){
+                handler.post(()->imageView.setImageResource(R.drawable.babybird));
+            }
+            else if(getToBird() == true && birdLv > 0){
+                handler.post(()->imageView.setImageResource(R.drawable.bird));
             }
         });
 
@@ -171,8 +165,6 @@ public class homeFragment extends Fragment {
                 else{
                     handler.post(() -> pgBar.setProgress(currentProgress+50));
                 }
-
-                setIsTaskCompleted(false);
                 // For storing progress
 //                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
 //                            p.setProgress(newProgress);
@@ -184,6 +176,7 @@ public class homeFragment extends Fragment {
 //                    progress.setImageId();
 //                }
             }
+            setIsTaskCompleted(false);
         });
 
         thread2.start();
