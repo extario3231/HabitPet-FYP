@@ -3,18 +3,13 @@ package com.example.habittrackerprojectjavaversion.ui;
 import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToBird;
 import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToCat;
 import static com.example.habittrackerprojectjavaversion.ui.Choosepet.getToDog;
-import static com.example.habittrackerprojectjavaversion.ui.Choosepet.setToDog;
 import static com.example.habittrackerprojectjavaversion.ui.MainActivity.getDb;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskCompleted;
-import static com.example.habittrackerprojectjavaversion.ui.taskFragment.getIsTaskFailed;
 import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTaskCompleted;
-import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTaskFailed;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -35,7 +29,6 @@ import com.example.habittrackerprojectjavaversion.data.SummaryNameMapping;
 import java.util.ArrayList;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 
 /**
@@ -126,9 +119,9 @@ public class homeFragment extends Fragment {
         pgBar = view.findViewById(R.id.determinateBar);
         imageView = view.findViewById(R.id.petImageView);
 
-        Thread thread3 = new Thread(() -> {
+        Thread thread1 = new Thread(() -> {
             if(getToDog() == true && dogLv == 0) {
-                handler.post(() -> imageView.setImageResource(R.drawable.babydog));
+                handler.post(() ->imageView.setImageResource(R.drawable.babydog));
             }
             else if(getToDog() == true && dogLv > 0){
                 handler.post(()->imageView.setImageResource(R.drawable.dog));
@@ -148,10 +141,8 @@ public class homeFragment extends Fragment {
         });
 
         Thread thread2 = new Thread(() -> {
-            if (getIsTaskCompleted()) {
-                int currentProgress = pgBar.getProgress();
-                if(currentProgress >= 100){
-                    handler.post(() -> pgBar.setProgress(0));
+            if (getIsTaskCompleted() == true) {
+                if(pgBar.getProgress() >= 100){
                     if(getToCat() == true){
                         catLv += 1;
                     }
@@ -161,9 +152,10 @@ public class homeFragment extends Fragment {
                     else if(getToDog() == true){
                         dogLv+=1;
                     }
+                    resetExp();
                 }
                 else{
-                    handler.post(() -> pgBar.setProgress(currentProgress+50));
+                    addExp();
                 }
                 // For storing progress
 //                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
@@ -179,8 +171,8 @@ public class homeFragment extends Fragment {
             setIsTaskCompleted(false);
         });
 
+        thread1.start();
         thread2.start();
-        thread3.start();
 
         return view;
     }
@@ -189,17 +181,7 @@ public class homeFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
         // generate quote
-        quoteArrayList.add("Hard work beats talent when talent doesn’t work hard.");
-        quoteArrayList.add("I am who I am today because of the choices I made yesterday.");
-        quoteArrayList.add("Whatever we believe about ourselves and our ability comes true for us");
-        quoteArrayList.add("If you really look closely, most overnight successes took a long time.");
-        quoteArrayList.add("Setting goals is the first step in turning the invisible into the visible.");
-        quoteArrayList.add("Impossible is just an opinion.");
-        quoteArrayList.add("The greater the difficulty, the more the glory in surmounting it.");
-
-        quotetv = (TextView) getView().findViewById(R.id.quoteTextView);
-        int quoteIndex = (int) (Math.random() * 6);
-        quotetv.setText(quoteArrayList.get(quoteIndex));
+        generateQuote();
 
         // choose habit pet
         buttonch = (Button) getView().findViewById(R.id.choosebutton);
@@ -226,5 +208,27 @@ public class homeFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.clear();
+    }
+
+    public synchronized void addExp(){
+        pgBar.setProgress(pgBar.getProgress()+50);
+    }
+
+    public synchronized void resetExp(){
+        pgBar.setProgress(0);
+    }
+
+    public void generateQuote(){
+        quoteArrayList.add("Hard work beats talent when talent doesn’t work hard.");
+        quoteArrayList.add("I am who I am today because of the choices I made yesterday.");
+        quoteArrayList.add("Whatever we believe about ourselves and our ability comes true for us");
+        quoteArrayList.add("If you really look closely, most overnight successes took a long time.");
+        quoteArrayList.add("Setting goals is the first step in turning the invisible into the visible.");
+        quoteArrayList.add("Impossible is just an opinion.");
+        quoteArrayList.add("The greater the difficulty, the more the glory in surmounting it.");
+
+        quotetv = (TextView) getView().findViewById(R.id.quoteTextView);
+        int quoteIndex = (int) (Math.random() * 6);
+        quotetv.setText(quoteArrayList.get(quoteIndex));
     }
 }

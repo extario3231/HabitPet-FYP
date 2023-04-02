@@ -38,7 +38,7 @@ public class CalendarDisplay extends AppCompatActivity {
             new Thread(() -> {
                 for (java.util.Calendar calendar : calendarView.getSelectedDates()) {
                     calendar.setTime(calendar.getTime());
-                    event.add(new EventDay(calendar, R.drawable.ic_baseline_save_24));
+                    event.add(new EventDay(calendar, R.drawable.ic_baseline_favorite_24));
                     runOnUiThread(() -> {
                         calendarView.setEvents(event);
                     });

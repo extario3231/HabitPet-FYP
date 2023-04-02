@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.habittrackerprojectjavaversion.R;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 public class Choosepet extends AppCompatActivity implements SelectListener {
     ArrayList<PetModel> petModels = new ArrayList<>();
     public static boolean isChangeToDog = false;
-    public static boolean isChangeToCat = false;
+    public static boolean isChangeToCat = true;
     public static boolean isChangeToBird = false;
 
     int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd};

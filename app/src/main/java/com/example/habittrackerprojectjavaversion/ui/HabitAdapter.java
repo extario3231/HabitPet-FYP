@@ -31,9 +31,7 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
-
         final NameMapping currentName = getItem(position);
-
 
         TextView default_text_view = listItemView.findViewById(R.id.default_text_view);
         default_text_view.setText(currentName.getHabitname());
@@ -52,8 +50,6 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
             @Override
             public void onClick(View v) {
                 currentName.NFavorite();
-                Toast.makeText(getContext(), "You lost 30 EXP for your pet!",
-                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -70,7 +66,5 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
 
         return listItemView;
     }
-
-
 }
 

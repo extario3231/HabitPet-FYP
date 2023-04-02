@@ -1,13 +1,9 @@
 package com.example.habittrackerprojectjavaversion.ui;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.ALARM_SERVICE;
 
-import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,12 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
-import com.annimon.stream.internal.Compat;
 import com.example.habittrackerprojectjavaversion.R;
 import com.example.habittrackerprojectjavaversion.data.NameMapping;
 
@@ -117,9 +110,6 @@ public class taskFragment extends Fragment {
         return view;
     }
 
-
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
@@ -156,7 +146,6 @@ public class taskFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 // user checked or unchecked a box
                 change.add(which);
-
             }
         });
 
@@ -198,8 +187,6 @@ public class taskFragment extends Fragment {
         // add own habit
         final EditText addHabitText;
         Button addButton;
-
-        Button addrecom;
 
         // create a alert dialog for entering new habit
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -244,26 +231,13 @@ public class taskFragment extends Fragment {
                         .setSmallIcon(R.drawable.cat)
                         .setAutoCancel(true);
 
-
                 NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity());
                 notificationManagerCompat.notify(1, builder2.build());
 
                 Intent intentnoti = new Intent(getActivity(),SetTime.class);
                 startActivity(intentnoti);
-
-
-
             }
         });
-
-        /*addrecom = view1.findViewById(R.id.addrecom);
-        addrecom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog1.dismiss();
-            }
-        });*/
 
         builder.setView(view);
         dialog = builder.create();
@@ -297,7 +271,6 @@ public class taskFragment extends Fragment {
                 listView.setAdapter(adapter);
             }
         });
-        //tick & cross not working now
 
     }
     public static boolean getIsTaskCompleted() {

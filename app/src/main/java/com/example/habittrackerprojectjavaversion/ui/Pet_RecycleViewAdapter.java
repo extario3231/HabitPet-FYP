@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +15,6 @@ import com.example.habittrackerprojectjavaversion.R;
 import com.example.habittrackerprojectjavaversion.data.PetModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Pet_RecycleViewAdapter extends RecyclerView.Adapter<Pet_RecycleViewAdapter.MyViewHolder> {
     Context context;

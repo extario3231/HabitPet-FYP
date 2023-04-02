@@ -22,18 +22,18 @@
             android:id="@+id/quoteTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:textAlignment="center"
             android:text="Quote for inspiration"
-            android:textSize="10dp"
+            android:textSize="15dp"
             android:textColor="#FF0000"
             android:textStyle="italic"
             android:fontFamily="monospace" />
 
         <ImageView
             android:id="@+id/petImageView"
-            android:layout_width="233dp"
-            android:layout_height="167dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             app:srcCompat="@drawable/testingimage" />
 
         <TextView
@@ -49,9 +49,9 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="300dp"
             android:layout_height="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:progress="25" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:progress="0" />
 
         <TextView
             android:id="@+id/textView9"
