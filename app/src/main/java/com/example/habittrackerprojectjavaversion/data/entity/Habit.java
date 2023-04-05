@@ -18,14 +18,14 @@ public class Habit {
     @NonNull
     @ColumnInfo(name = "all_tasks_completed", defaultValue = "N")
     private String areAllTasksCompleted;
-    @ColumnInfo(name = "image_id")
-    private int imageId;
+    @ColumnInfo(name = "image_path")
+    private String imagePath;
 
-    public Habit(String name, String startDate, String areAllTasksCompleted, int imageId) {
+    public Habit(String name, String startDate, String areAllTasksCompleted, String imagePath) {
         this.name = name;
         this.startDate = startDate;
         this.areAllTasksCompleted = areAllTasksCompleted;
-        this.imageId = imageId;
+        this.imagePath = imagePath;
     }
 
     public long getHabitId() {
@@ -60,11 +60,11 @@ public class Habit {
         this.areAllTasksCompleted = areAllTasksCompleted;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

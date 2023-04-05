@@ -9,12 +9,12 @@ public class PetProgress {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "progress_id")
     private long progressId;
-    @ColumnInfo(name = "image_id")
-    private int imageId;
+    @ColumnInfo(name = "pet_image_path")
+    private String petImagePath;
     private int progress;
 
-    public PetProgress(int imageId, int progress) {
-        this.imageId = imageId;
+    public PetProgress(String petImagePath, int progress) {
+        this.petImagePath = petImagePath;
         this.progress = progress;
     }
 
@@ -26,12 +26,12 @@ public class PetProgress {
         this.progressId = progressId;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getPetImagePath() {
+        return petImagePath;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setPetImagePath(String petImagePath) {
+        this.petImagePath = petImagePath;
     }
 
     public int getProgress() {
