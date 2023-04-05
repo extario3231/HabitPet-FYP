@@ -20,7 +20,7 @@ public class PetProgressRepo {
 
     public Single<PetProgress> getProgress() {
         return Single.just(petProgressDao.findProgress()).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
+                .observeOn(AndroidSchedulers.from(Looper.getMainLooper(), true));
     }
 
     public Completable insert(PetProgress progress) {
