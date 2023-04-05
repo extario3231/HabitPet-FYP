@@ -44,7 +44,7 @@ public class DatabaseTest {
 
     @Test
     public void insertAndReadTest() {
-        Habit habit = new Habit("tennis", "2023/8/9", "N", 5669);
+        Habit habit = new Habit("tennis", "2023/8/9", "N", "5669");
         habitDao.insert(habit);
         Habit tennis = habitDao.findByName("tennis");
         assertThat(tennis.getName(), equalTo(habit.getName()));
@@ -52,7 +52,7 @@ public class DatabaseTest {
 
     @Test
     public void updateAndReadTest() {
-        Habit habit = new Habit("tennis", "2023/8/9", "N", 5669);
+        Habit habit = new Habit("tennis", "2023/8/9", "N", "5669");
         habitDao.insert(habit);
         Habit habitToUpdate = habitDao.findByName("tennis");
         habitToUpdate.setName("football");
@@ -63,7 +63,7 @@ public class DatabaseTest {
 
     @Test
     public void findHabitByDateTest() {
-        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", 5669);
+        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", "5669");
         habitDao.insert(habitToInsert);
         List<Habit> habit = habitDao.findByDate("2023/8/9");
         assertThat(habit.get(0).getName(), equalTo("tennis"));
@@ -71,7 +71,7 @@ public class DatabaseTest {
 
     @Test
     public void findHabitByTask() {
-        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", 5669);
+        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", "5669");
         long id = habitDao.insert(habitToInsert);
         Task taskToAdd = new Task("do", 23, id);
         taskDao.addTask(taskToAdd);
