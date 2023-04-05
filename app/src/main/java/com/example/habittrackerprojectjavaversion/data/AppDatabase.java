@@ -35,6 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
 //                                    " name TEXT, habit_name TEXT)");
 //                        }
 //                    })
+                    .allowMainThreadQueries()
                     .build();
         instance.getOpenHelper().getWritableDatabase();
         return instance;
