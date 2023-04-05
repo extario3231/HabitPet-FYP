@@ -10,6 +10,7 @@ import static com.example.habittrackerprojectjavaversion.ui.taskFragment.setIsTa
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.habittrackerprojectjavaversion.data.SummaryNameMapping;
 import java.util.ArrayList;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 
 /**
@@ -158,15 +160,14 @@ public class homeFragment extends Fragment {
                     addExp();
                 }
                 // For storing progress
-//                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
-//                            p.setProgress(newProgress);
-//                            progressRepo.update(p);
-//                        }, err -> Log.e(TAG, "update progress error", err)
-//                );
-//                compositeDisposable.add(updateProgress);
-//                if (newProgress < currentProgress) {
-//                    progress.setImageId();
-//                }
+                int progress = pgBar.getProgress();
+                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
+                    p.setProgress(progress);
+                    Disposable disposable = progressRepo.update(p).subscribe(() -> Log.i(TAG, "progress updated."));
+                    compositeDisposable.add(disposable);
+                        }, err -> Log.e(TAG, "update progress error", err)
+                );
+                compositeDisposable.add(updateProgress);
             }
             setIsTaskCompleted(false);
         });
