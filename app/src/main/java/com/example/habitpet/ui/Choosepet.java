@@ -1,5 +1,7 @@
 package com.example.habitpet.ui;
 
+import static com.example.habitpet.ui.MainActivity.getDb;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,13 +11,14 @@ import android.widget.Toast;
 
 import com.example.habitpet.R;
 import com.example.habitpet.data.PetModel;
+import com.example.habitpet.data.entity.PetProgress;
 
 import java.util.ArrayList;
 
 public class Choosepet extends AppCompatActivity implements SelectListener {
     ArrayList<PetModel> petModels = new ArrayList<>();
-    public static boolean isChangeToDog = false;
     public static boolean isChangeToCat = true;
+    public static boolean isChangeToDog = false;
     public static boolean isChangeToBird = false;
 
     int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd};
@@ -45,12 +48,31 @@ public class Choosepet extends AppCompatActivity implements SelectListener {
     public void onItemClicked(PetModel petModel) {
         Toast.makeText(this,"You are successfully changed to " + petModel.getPetname(),Toast.LENGTH_SHORT).show();
 
-        if (petModel.getPetname() == "Dog"){
-            setToDog(true);
-        } else if(petModel.getPetname() == "Cat"){
-            setToCat(true);
-        } else{
-            setToBird(true);
+        PetProgress pg = getDb().petProgressDao().findPetName("cat");
+        PetProgress pg2 = getDb().petProgressDao().findPetName("dog");
+        PetProgress pg3 = getDb().petProgressDao().findPetName("bird");
+
+        if (petModel.getPetname()=="Cat"){
+            pg.setPet(true);
+            pg2.setPet(false);
+            pg3.setPet(false);
+            getDb().petProgressDao().updateProgress(pg);
+            getDb().petProgressDao().updateProgress(pg2);
+            getDb().petProgressDao().updateProgress(pg3);
+        } else if(petModel.getPetname()=="Dog"){
+            pg.setPet(false);
+            pg2.setPet(true);
+            pg3.setPet(false);
+            getDb().petProgressDao().updateProgress(pg);
+            getDb().petProgressDao().updateProgress(pg2);
+            getDb().petProgressDao().updateProgress(pg3);
+        } else if(petModel.getPetname()=="Bird"){
+            pg.setPet(false);
+            pg2.setPet(false);
+            pg3.setPet(true);
+            getDb().petProgressDao().updateProgress(pg);
+            getDb().petProgressDao().updateProgress(pg2);
+            getDb().petProgressDao().updateProgress(pg3);
         }
         finish();
     }

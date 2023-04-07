@@ -10,8 +10,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import androidx.room.Room;
+
 import com.example.habitpet.R;
 import com.example.habitpet.data.AppDatabase;
+import com.example.habitpet.data.dao.PetProgressDao;
 import com.example.habitpet.data.entity.PetProgress;
 import com.example.habitpet.data.repo.PetProgressRepo;
 
@@ -62,7 +65,7 @@ public class MainActivity extends Activity {
                 {
                     Intent intent = new Intent(MainActivity.this,NextActivity.class) ;
                     startActivity(intent);
-                    finish();
+                    //finish();
                 }
                 return false;
             }
@@ -83,7 +86,10 @@ public class MainActivity extends Activity {
         PetProgress progress = db.petProgressDao().findProgress();
         if (progress != null) return Disposable.empty();
 
-        return progressRepo.insert(new PetProgress("/res/drawable/cat.png", 0))
+        getDb().petProgressDao().insert(new PetProgress("dog", false, 98, 0));
+        getDb().petProgressDao().insert(new PetProgress("bird", false, 98, 0));
+
+        return progressRepo.insert(new PetProgress("cat",true, 98, 0))
                 .subscribe(() -> Log.i(TAG, "init complete."),
                         err -> Log.e(TAG, "init failed: " + err.getMessage()));
     }

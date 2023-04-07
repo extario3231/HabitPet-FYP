@@ -24,6 +24,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.habitpet.R;
+import com.example.habitpet.data.entity.PetProgress;
 import com.example.habitpet.data.repo.PetProgressRepo;
 import com.example.habitpet.data.SummaryNameMapping;
 
@@ -65,13 +66,7 @@ public class homeFragment extends Fragment {
 
     ArrayList<SummaryNameMapping> showhabitlist = new ArrayList<>();
     private summary habitlist;
-    private PetProgressRepo progressRepo = new PetProgressRepo(getDb());
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private static final String TAG = "HomeFragment";
-    int catLv = 0;
-    int dogLv = 0;
-    int birdLv = 0;
     public homeFragment() {
         // Required empty public constructor
     }
@@ -118,63 +113,52 @@ public class homeFragment extends Fragment {
         listView.setTextFilterEnabled(true);
         listView.setAdapter(adapter);
 
-        pgBar = view.findViewById(R.id.determinateBar);
         imageView = view.findViewById(R.id.petImageView);
-
-        Thread thread1 = new Thread(() -> {
-            if(getToDog() == true && dogLv == 0) {
-                handler.post(() ->imageView.setImageResource(R.drawable.babydog));
-            }
-            else if(getToDog() == true && dogLv > 0){
-                handler.post(()->imageView.setImageResource(R.drawable.dog));
-            }
-            else if(getToCat() == true && catLv == 0){
-                handler.post(()->imageView.setImageResource(R.drawable.testingimage));
-            }
-            else if(getToCat() == true && catLv > 0){
-                handler.post(()->imageView.setImageResource(R.drawable.cat));
-            }
-            else if(getToBird() == true && birdLv == 0){
-                handler.post(()->imageView.setImageResource(R.drawable.babybird));
-            }
-            else if(getToBird() == true && birdLv > 0){
-                handler.post(()->imageView.setImageResource(R.drawable.bird));
+        pgBar = view.findViewById(R.id.determinateBar);
+        Thread thread = new Thread(()-> {
+            if (getDb().petProgressDao().isPet("cat") == true) {
+                if (getDb().petProgressDao().findLv("cat") == 0) {
+                    imageView.setImageResource(R.drawable.testingimage);
+                } else {
+                    imageView.setImageResource(R.drawable.cat);
+                }
+                pgBar.setProgress(getDb().petProgressDao().findExp("cat"));
+            } else if (getDb().petProgressDao().isPet("dog") == true) {
+                if (getDb().petProgressDao().findLv("dog") == 0) {
+                    imageView.setImageResource(R.drawable.babydog);
+                } else {
+                    imageView.setImageResource(R.drawable.dog);
+                }
+                pgBar.setProgress(getDb().petProgressDao().findExp("dog"));
+            } else if (getDb().petProgressDao().isPet("bird") == true) {
+                if (getDb().petProgressDao().findLv("bird") == 0) {
+                    imageView.setImageResource(R.drawable.babybird);
+                } else {
+                    imageView.setImageResource(R.drawable.bird);
+                }
+                pgBar.setProgress(getDb().petProgressDao().findExp("bird"));
             }
         });
+        if (getDb().petProgressDao().findExp("cat") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("cat");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("dog") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("dog");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("bird") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("bird");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
 
-        Thread thread2 = new Thread(() -> {
-            if (getIsTaskCompleted() == true) {
-                if(pgBar.getProgress() >= 100){
-                    if(getToCat() == true){
-                        catLv += 1;
-                    }
-                    else if(getToBird() == true){
-                        birdLv+=1;
-                    }
-                    else if(getToDog() == true){
-                        dogLv+=1;
-                    }
-                    resetExp();
-                }
-                else{
-                    addExp();
-                }
-                // For storing progress
-                int progress = pgBar.getProgress();
-                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
-                    p.setProgress(p.getProgress() + progress);
-                    Disposable disposable = progressRepo.update(p).subscribe(() -> Log.i(TAG, "progress updated."));
-                    compositeDisposable.add(disposable);
-                        }
-                );
-                compositeDisposable.add(updateProgress);
-            }
-            setIsTaskCompleted(false);
-        });
-
-        thread1.start();
-        thread2.start();
-
+        thread.start();
         return view;
     }
 
@@ -204,21 +188,6 @@ public class homeFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-    }
-
-    public synchronized void addExp(){
-        pgBar.setProgress(pgBar.getProgress()+50);
-    }
-
-    public synchronized void resetExp(){
-        pgBar.setProgress(0);
-    }
-
     public void generateQuote(){
         quoteArrayList.add("Hard work beats talent when talent doesn’t work hard.");
         quoteArrayList.add("I am who I am today because of the choices I made yesterday.");

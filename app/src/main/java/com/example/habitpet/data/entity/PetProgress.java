@@ -9,13 +9,20 @@ public class PetProgress {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "progress_id")
     private long progressId;
-    @ColumnInfo(name = "pet_image_path")
-    private String petImagePath;
+    @ColumnInfo(name = "pet_name")
+    private String petName;
+    @ColumnInfo(name = "is_pet")
+    private boolean isPet;
+    @ColumnInfo(name = "progress")
     private int progress;
+    @ColumnInfo(name = "petLv")
+    private int petLv;
 
-    public PetProgress(String petImagePath, int progress) {
-        this.petImagePath = petImagePath;
+    public PetProgress(String petName, boolean isPet, int progress, int petLv) {
+        this.petName = petName;
+        this.isPet = isPet;
         this.progress = progress;
+        this.petLv = petLv;
     }
 
     public long getProgressId() {
@@ -26,19 +33,35 @@ public class PetProgress {
         this.progressId = progressId;
     }
 
-    public String getPetImagePath() {
-        return petImagePath;
-    }
-
-    public void setPetImagePath(String petImagePath) {
-        this.petImagePath = petImagePath;
-    }
-
     public int getProgress() {
         return progress;
     }
 
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    public int getPetLv() {
+        return petLv;
+    }
+
+    public void setPetLv(int petLv) {
+        this.petLv = petLv;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public boolean isPet() {
+        return isPet;
+    }
+
+    public void setPet(boolean pet) {
+        isPet = pet;
     }
 }
