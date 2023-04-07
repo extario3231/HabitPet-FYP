@@ -162,10 +162,10 @@ public class homeFragment extends Fragment {
                 // For storing progress
                 int progress = pgBar.getProgress();
                 Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
-                    p.setProgress(progress);
+                    p.setProgress(p.getProgress() + progress);
                     Disposable disposable = progressRepo.update(p).subscribe(() -> Log.i(TAG, "progress updated."));
                     compositeDisposable.add(disposable);
-                        }, err -> Log.e(TAG, "update progress error", err)
+                        }
                 );
                 compositeDisposable.add(updateProgress);
             }
