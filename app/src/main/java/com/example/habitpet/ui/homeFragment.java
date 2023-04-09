@@ -1,8 +1,6 @@
 package com.example.habitpet.ui;
 
-import static com.example.habitpet.ui.Choosepet.getToBird;
-import static com.example.habitpet.ui.Choosepet.getToCat;
-import static com.example.habitpet.ui.Choosepet.getToDog;
+
 import static com.example.habitpet.ui.MainActivity.getDb;
 import static com.example.habitpet.ui.taskFragment.getIsTaskCompleted;
 import static com.example.habitpet.ui.taskFragment.setIsTaskCompleted;
@@ -50,7 +48,6 @@ public class homeFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
 
-
     private String mParam1;
     private String mParam2;
 
@@ -62,7 +59,6 @@ public class homeFragment extends Fragment {
     private ArrayList<String> quoteArrayList = new ArrayList<>();
     private ListView listView;
     public ImageView imageView;
-    private Handler handler = new Handler();
 
     ArrayList<SummaryNameMapping> showhabitlist = new ArrayList<>();
     private summary habitlist;
@@ -115,6 +111,44 @@ public class homeFragment extends Fragment {
 
         imageView = view.findViewById(R.id.petImageView);
         pgBar = view.findViewById(R.id.determinateBar);
+
+        if (getDb().petProgressDao().findExp("cat") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("cat");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("dog") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("dog");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("bird") >= 100) {
+            PetProgress pg = getDb().petProgressDao().findPetName("bird");
+            pg.setProgress(0);
+            pg.setPetLv(1);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("cat") < 0){
+            PetProgress pg = getDb().petProgressDao().findPetName("cat");
+            pg.setProgress(98);
+            pg.setPetLv(0);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("dog") < 0){
+            PetProgress pg = getDb().petProgressDao().findPetName("dog");
+            pg.setProgress(98);
+            pg.setPetLv(0);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+        else if (getDb().petProgressDao().findExp("bird") < 0){
+            PetProgress pg = getDb().petProgressDao().findPetName("bird");
+            pg.setProgress(98);
+            pg.setPetLv(0);
+            getDb().petProgressDao().updateProgress(pg);
+        }
+
         Thread thread = new Thread(()-> {
             if (getDb().petProgressDao().isPet("cat") == true) {
                 if (getDb().petProgressDao().findLv("cat") == 0) {
@@ -139,24 +173,6 @@ public class homeFragment extends Fragment {
                 pgBar.setProgress(getDb().petProgressDao().findExp("bird"));
             }
         });
-        if (getDb().petProgressDao().findExp("cat") >= 100) {
-            PetProgress pg = getDb().petProgressDao().findPetName("cat");
-            pg.setProgress(0);
-            pg.setPetLv(1);
-            getDb().petProgressDao().updateProgress(pg);
-        }
-        else if (getDb().petProgressDao().findExp("dog") >= 100) {
-            PetProgress pg = getDb().petProgressDao().findPetName("dog");
-            pg.setProgress(0);
-            pg.setPetLv(1);
-            getDb().petProgressDao().updateProgress(pg);
-        }
-        else if (getDb().petProgressDao().findExp("bird") >= 100) {
-            PetProgress pg = getDb().petProgressDao().findPetName("bird");
-            pg.setProgress(0);
-            pg.setPetLv(1);
-            getDb().petProgressDao().updateProgress(pg);
-        }
 
         thread.start();
         return view;

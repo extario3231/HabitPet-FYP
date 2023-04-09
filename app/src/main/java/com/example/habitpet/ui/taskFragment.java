@@ -44,20 +44,15 @@ public class taskFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    // self-defined variables
     public habits habitlist;
     private static boolean isTaskCompleted;
     private static boolean isTaskFailed;
-
-    // self-defined variables
     AlertDialog dialog;
     AlertDialog dialog1;
     Button button;
     Button buttonre;
-
     Button buttomrefresh;
-
-    ArrayList<NameMapping> showhabitlist = new ArrayList<NameMapping>();
-    //private habits habitlist;
 
     // One Button
     Button BSelectImage;
@@ -104,7 +99,6 @@ public class taskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
         return view;
@@ -149,7 +143,7 @@ public class taskFragment extends Fragment {
             }
         });
 
-// add OK and Cancel buttons
+        // add OK and Cancel buttons
         builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

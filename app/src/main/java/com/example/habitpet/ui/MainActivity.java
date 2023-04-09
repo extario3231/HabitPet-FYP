@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
                 {
                     Intent intent = new Intent(MainActivity.this,NextActivity.class) ;
                     startActivity(intent);
-                    //finish();
+                    finish();
                 }
                 return false;
             }

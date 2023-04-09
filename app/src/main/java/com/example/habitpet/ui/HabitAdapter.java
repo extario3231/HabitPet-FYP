@@ -1,8 +1,5 @@
 package com.example.habitpet.ui;
 
-import static com.example.habitpet.ui.Choosepet.getToBird;
-import static com.example.habitpet.ui.Choosepet.getToCat;
-import static com.example.habitpet.ui.Choosepet.getToDog;
 import static com.example.habitpet.ui.MainActivity.getDb;
 import static com.example.habitpet.ui.taskFragment.setIsTaskCompleted;
 
@@ -31,7 +28,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public class HabitAdapter extends ArrayAdapter<NameMapping> {
     private PetProgressRepo progressRepo = new PetProgressRepo(getDb());
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private static final String TAG = "HomeFragment";
+
     public HabitAdapter(Activity context, ArrayList<NameMapping> showhabitlist){
         super(context,0, showhabitlist);
     }
@@ -66,8 +63,9 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
         });
 
 
-        ImageButton tickbutton = (ImageButton) listItemView.findViewById(R.id.tick);
-        tickbutton.setOnClickListener(new View.OnClickListener() {
+        ImageButton tickButton = (ImageButton) listItemView.findViewById(R.id.tick);
+        Button removeButton = (Button) listItemView.findViewById(R.id.remove);
+        tickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "You gained 2 EXP for your pet!",
@@ -96,6 +94,33 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
                 }
 //                compositeDisposable.add(updateProgress);
                 setIsTaskCompleted(true);
+            }
+        });
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "You lost 2 EXP for your pet!",
+                        Toast.LENGTH_SHORT).show();
+
+                PetProgress pp = getDb().petProgressDao().findPetName("cat");
+                PetProgress pp2 = getDb().petProgressDao().findPetName("dog");
+                PetProgress pp3 = getDb().petProgressDao().findPetName("bird");
+
+                if(getDb().petProgressDao().isPet("cat") == true){
+                    pp.setProgress(getDb().petProgressDao().findExp("cat")-2);
+                    getDb().petProgressDao().updateProgress(pp);
+                }
+                else if(getDb().petProgressDao().isPet("dog") == true){
+                    pp2.setProgress(getDb().petProgressDao().findExp("dog")-2);
+                    getDb().petProgressDao().updateProgress(pp2);
+                }
+                else if(getDb().petProgressDao().isPet("bird") == true){
+                    pp3.setProgress(getDb().petProgressDao().findExp("bird")-2);
+                    getDb().petProgressDao().updateProgress(pp3);
+                }
+
+                setIsTaskCompleted(false);
             }
         });
 
