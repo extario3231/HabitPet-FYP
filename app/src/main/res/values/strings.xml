@@ -16,8 +16,8 @@
     </string-array>
 
     <string-array name="petsound">
-        <item>Woof!</item>
         <item>Meow!</item>
+        <item>Woof!</item>
         <item>Aww!</item>
     </string-array>
     <string name="Addyourownhabit">Add you own habit</string>
