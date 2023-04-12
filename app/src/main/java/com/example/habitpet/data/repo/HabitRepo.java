@@ -40,8 +40,8 @@ public class HabitRepo {
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
-    public Single<List<Habit>> getAllByAllTaskCompletion() {
-        return Single.just(habitDao.findByAllTaskCompletion()).subscribeOn(Schedulers.io())
+    public Single<List<Habit>> findByIsBuiltin(boolean isBuiltin) {
+        return Single.just(habitDao.findByIsBuiltin(isBuiltin)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.from(Looper.myLooper(), true));
     }
 
