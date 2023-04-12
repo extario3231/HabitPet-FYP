@@ -10,12 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.room.Room;
-
 import com.example.habitpet.R;
 import com.example.habitpet.data.AppDatabase;
-import com.example.habitpet.data.dao.PetProgressDao;
-import com.example.habitpet.data.entity.Habit;
 import com.example.habitpet.data.entity.PetProgress;
 import com.example.habitpet.data.repo.PetProgressRepo;
 
