@@ -165,7 +165,7 @@ public class taskFragment extends Fragment {
                 // user clicked OK
                 for (int i = 0;i<change.size();i++){
                     habitlist.setfavor(change.get(i));
-                    getDb().habitDao().insert(new Habit(hab[change.get(i)], "", "", ""));
+                    getDb().habitDao().insert(new Habit(hab[change.get(i)], "", "", false));
                 }
                 habitlist.setSelection("favourite");
                 HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
@@ -222,11 +222,11 @@ public class taskFragment extends Fragment {
             public void onClick(View view) {
                 if(aUri == null){
                     habitlist.addhabit(addHabitText.getText().toString());
-                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", ""));
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", false));
                 }
                 else{
                     habitlist.addhabitwithimage(addHabitText.getText().toString(), aUri);
-                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", aUri.toString()));
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", aUri.toString(), false));
                 }
                 habitlist.setSelection("favourite");
                 dialog.dismiss();
