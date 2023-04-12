@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "habit")
 public class Habit {
     @PrimaryKey(autoGenerate = true)
@@ -12,20 +15,18 @@ public class Habit {
     private long habitId;
     @NonNull
     private String name;
-    @NonNull
     @ColumnInfo(name = "start_date")
     private String startDate;
-    @NonNull
-    @ColumnInfo(name = "all_tasks_completed", defaultValue = "N")
-    private String areAllTasksCompleted;
     @ColumnInfo(name = "image_path")
     private String imagePath;
+    @ColumnInfo(name = "is_builtin")
+    private boolean isBuiltin;
 
-    public Habit(String name, String startDate, String areAllTasksCompleted, String imagePath) {
+    public Habit(@NonNull String name, String startDate, String imagePath, boolean isBuiltin) {
         this.name = name;
         this.startDate = startDate;
-        this.areAllTasksCompleted = areAllTasksCompleted;
         this.imagePath = imagePath;
+        this.isBuiltin = isBuiltin;
     }
 
     public long getHabitId() {
@@ -52,19 +53,19 @@ public class Habit {
         this.startDate = startDate;
     }
 
-    public String getAreAllTasksCompleted() {
-        return areAllTasksCompleted;
-    }
-
-    public void setAreAllTasksCompleted(String areAllTasksCompleted) {
-        this.areAllTasksCompleted = areAllTasksCompleted;
-    }
-
     public String getImagePath() {
         return imagePath;
     }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public boolean isBuiltin() {
+        return isBuiltin;
+    }
+
+    public void setBuiltin(boolean builtin) {
+        isBuiltin = builtin;
     }
 }
