@@ -15,10 +15,7 @@ import org.junit.runner.RunWith;
 
 import com.example.habitpet.data.AppDatabase;
 import com.example.habitpet.data.dao.HabitDao;
-import com.example.habitpet.data.dao.TaskDao;
 import com.example.habitpet.data.entity.Habit;
-import com.example.habitpet.data.entity.HabitAndTasks;
-import com.example.habitpet.data.entity.Task;
 
 import java.util.List;
 
@@ -30,7 +27,6 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class DatabaseTest {
     private HabitDao habitDao;
-    private TaskDao taskDao;
     private AppDatabase db;
 
     @Before
@@ -38,12 +34,11 @@ public class DatabaseTest {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         habitDao = db.habitDao();
-        taskDao = db.taskDao();
     }
 
     @Test
     public void insertAndReadTest() {
-        Habit habit = new Habit("tennis", "2023/8/9", "N", "5669");
+        Habit habit = new Habit("tennis", "2023/8/9", "5669", true);
         habitDao.insert(habit);
         Habit tennis = habitDao.findByName("tennis");
         assertThat(tennis.getName(), equalTo(habit.getName()));
@@ -51,7 +46,7 @@ public class DatabaseTest {
 
     @Test
     public void updateAndReadTest() {
-        Habit habit = new Habit("tennis", "2023/8/9", "N", "5669");
+        Habit habit = new Habit("tennis", "2023/8/9", "5669", true);
         habitDao.insert(habit);
         Habit habitToUpdate = habitDao.findByName("tennis");
         habitToUpdate.setName("football");
@@ -62,19 +57,19 @@ public class DatabaseTest {
 
     @Test
     public void findHabitByDateTest() {
-        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", "5669");
+        Habit habitToInsert = new Habit("tennis", "2023/8/9", "5669", true);
         habitDao.insert(habitToInsert);
         List<Habit> habit = habitDao.findByDate("2023/8/9");
         assertThat(habit.get(0).getName(), equalTo("tennis"));
     }
 
     @Test
-    public void findHabitByTask() {
-        Habit habitToInsert = new Habit("tennis", "2023/8/9", "N", "5669");
-        long id = habitDao.insert(habitToInsert);
-        Task taskToAdd = new Task("do", 23, id);
-        taskDao.addTask(taskToAdd);
-        List<HabitAndTasks> task = taskDao.findByHabit("tennis");
-        assertThat(task.get(0).getTasks().get(0).getName(), equalTo("do"));
+    public void findBuiltInHabitTest() {
+        Habit habit1 = new Habit("tennis", "2023/8/9", "5669", true);
+        habitDao.insert(habit1);
+        Habit habit2 = new Habit("basketball", "2023/8/9", "5669", false);
+        habitDao.insert(habit2);
+        List<Habit> habit = habitDao.findByIsBuiltin(true);
+        assertThat(habit.get(0).getName(), equalTo("basketball"));
     }
 }
