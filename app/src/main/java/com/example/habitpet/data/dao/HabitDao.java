@@ -19,8 +19,8 @@ public interface HabitDao {
     @Query("SELECT * FROM habit WHERE name = :name")
     Habit findByName(String name);
 
-    @Query("SELECT * FROM habit WHERE all_tasks_completed = 'Y'")
-    List<Habit> findByAllTaskCompletion();
+    @Query("SELECT * FROM habit WHERE is_builtin = :isBuiltin")
+    List<Habit> findByIsBuiltin(boolean isBuiltin);
 
     @Query("SELECT * FROM habit WHERE start_date = :date")
     List<Habit> findByDate(String date);
