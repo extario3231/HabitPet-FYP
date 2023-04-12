@@ -16,11 +16,11 @@ public interface CalendarProgressDao {
     @Query("SELECT * FROM calendar_progress WHERE habit_name = :name")
     List<CalendarProgress> findProgressByName(String name);
     @Query("SELECT year FROM calendar_progress WHERE habit_name = :name")
-    int findYear(String name);
+    List<Integer> findYear(String name);
     @Query("SELECT month FROM calendar_progress WHERE habit_name = :name")
-    int findMonth(String name);
+    List<Integer> findMonth(String name);
     @Query("SELECT day FROM calendar_progress WHERE habit_name = :name")
-    int findDay(String name);
+    List<Integer> findDay(String name);
     @Insert
     void insert(CalendarProgress calendarProgress);
     @Update

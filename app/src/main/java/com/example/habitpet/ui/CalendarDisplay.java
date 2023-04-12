@@ -38,14 +38,26 @@ public class CalendarDisplay extends AppCompatActivity {
         btSetTarget = findViewById(R.id.button_SetTarget);
 
         List<EventDay> event = new ArrayList<>();
+        ArrayList<Calendar> calendarArrayList = new ArrayList<>();
+        List<Integer> yearList = getDb().calendarProgressDao().findYear("test");
+        List<Integer> monthList = getDb().calendarProgressDao().findMonth("test");
+        List<Integer> dayList = getDb().calendarProgressDao().findDay("test");
 
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.set(
-                getDb().calendarProgressDao().findYear("test"),
-                getDb().calendarProgressDao().findMonth("test"),
-                getDb().calendarProgressDao().findDay("test")
-        );
-        event.add(new EventDay(calendar1, R.drawable.ic_baseline_favorite_24));
+        for(int i=0;i<50;i++){
+            Calendar calendar = Calendar.getInstance();
+            calendarArrayList.add(calendar);
+        }
+
+        for(int j=0;j<yearList.size();j++){
+            calendarArrayList.get(j).set(
+                    yearList.get(j),
+                    monthList.get(j),
+                    dayList.get(j)
+            );
+            event.add(new EventDay(calendarArrayList.get(j), R.drawable.ic_baseline_favorite_24));
+        }
+
+
         calendarView.setEvents(event);
 
         btSetTarget.setOnClickListener(v -> {

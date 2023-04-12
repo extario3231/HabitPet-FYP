@@ -333,5 +333,4 @@ public class taskFragment extends Fragment {
             }
         }
     }
-
 }
