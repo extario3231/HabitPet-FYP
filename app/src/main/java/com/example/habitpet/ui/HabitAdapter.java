@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.habitpet.R;
 import com.example.habitpet.data.NameMapping;
+import com.example.habitpet.data.entity.Habit;
 import com.example.habitpet.data.entity.PetProgress;
 import com.example.habitpet.data.repo.PetProgressRepo;
 
@@ -52,16 +53,6 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
         else{
             image.setImageResource(currentName.getImageResId());
         }
-
-        Button button = listItemView.findViewById(R.id.remove);
-        //button.setOnClickListener(new ItemButton_Click(position));
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentName.NFavorite();
-            }
-        });
-
 
         ImageButton tickButton = (ImageButton) listItemView.findViewById(R.id.tick);
         Button removeButton = (Button) listItemView.findViewById(R.id.remove);
@@ -100,6 +91,9 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentName.NFavorite();
+                Habit habit = getDb().habitDao().findByName(currentName.getHabitname());
+                getDb().habitDao().delete(habit);
                 Toast.makeText(getContext(), "You lost 2 EXP for your pet!",
                         Toast.LENGTH_SHORT).show();
 

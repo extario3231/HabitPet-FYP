@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class Choosepet extends AppCompatActivity implements SelectListener {
     ArrayList<PetModel> petModels = new ArrayList<>();
 
-    int[] petImages = {R.drawable.cat_rv,R.drawable.dog_rv,R.drawable.bd};
-    String[] petNames = new String[]{"Cat", "Dog", "Bird"};
+    int[] petImages = {R.drawable.dog_rv,R.drawable.cat_rv,R.drawable.bd};
+    String[] petNames = new String[]{"Dog", "Cat", "Bird"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

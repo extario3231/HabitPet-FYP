@@ -2,6 +2,8 @@ package com.example.habitpet.ui;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.example.habitpet.ui.MainActivity.getDb;
+
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
@@ -25,8 +27,10 @@ import android.widget.ListView;
 
 import com.example.habitpet.R;
 import com.example.habitpet.data.NameMapping;
+import com.example.habitpet.data.entity.Habit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -108,9 +112,24 @@ public class taskFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-
         habitlist = new habits();
 
+        List<Habit> allhab = getDb().habitDao().findAll();
+        for(int i=0;i<allhab.size();i++){
+            int k=0;
+            for (int q=0;q<habitlist.size();q++) {
+                if(allhab.get(i).getName().equals(habitlist.get(q))){
+                    habitlist.get(q).toggleFavorite();
+                    k++;
+                }
+            }
+            if(k==0){
+                if(allhab.get(i).getImagePath()!=null)
+                    habitlist.addhabitwithimage(allhab.get(i).getName(), Uri.parse(allhab.get(i).getImagePath()));
+                else
+                    habitlist.addhabit(allhab.get(i).getName());
+            }
+        }
         habitlist.setSelection("favourite");
 
         HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
@@ -120,12 +139,7 @@ public class taskFragment extends Fragment {
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setTitle("Add recommend");
-        //habitlist.setSelection("All");
-        //RecomAdapter recomAdapter = new RecomAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
-        //ListView listView1 = getView().findViewById(R.id.recom);
-        //listView1.setTextFilterEnabled(true);
-        //listView1.setAdapter(recomAdapter);
-        //View view1 = getLayoutInflater().inflate(R.layout.activity_habit, null);
+
         String[] hab = {"Sleep and wake up early","Sport regularly","Football","Basketball","Badminton",
                 "Tennis","Table Tennis","Golf","Baseball","Gym","Yoga","Track spending","Check email",
                 "Drinking more water","Eating Healthy food","Lazy",
@@ -135,6 +149,7 @@ public class taskFragment extends Fragment {
                 false, false, false, false, false,
                 false, false, false, false, false};
         ArrayList<Integer> change = new ArrayList<Integer>();
+
         builder1.setMultiChoiceItems(hab, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -150,6 +165,7 @@ public class taskFragment extends Fragment {
                 // user clicked OK
                 for (int i = 0;i<change.size();i++){
                     habitlist.setfavor(change.get(i));
+                    getDb().habitDao().insert(new Habit(hab[change.get(i)], "", "", ""));
                 }
                 habitlist.setSelection("favourite");
                 HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
@@ -204,8 +220,14 @@ public class taskFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(aUri == null){habitlist.addhabit(addHabitText.getText().toString());}
-                else{habitlist.addhabitwithimage(addHabitText.getText().toString(), aUri);}
+                if(aUri == null){
+                    habitlist.addhabit(addHabitText.getText().toString());
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", ""));
+                }
+                else{
+                    habitlist.addhabitwithimage(addHabitText.getText().toString(), aUri);
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", aUri.toString()));
+                }
                 habitlist.setSelection("favourite");
                 dialog.dismiss();
                 HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
