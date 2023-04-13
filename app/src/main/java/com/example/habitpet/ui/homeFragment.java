@@ -6,6 +6,7 @@ import static com.example.habitpet.ui.taskFragment.getIsTaskCompleted;
 import static com.example.habitpet.ui.taskFragment.setIsTaskCompleted;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,11 +23,13 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.habitpet.R;
+import com.example.habitpet.data.entity.Habit;
 import com.example.habitpet.data.entity.PetProgress;
 import com.example.habitpet.data.repo.PetProgressRepo;
 import com.example.habitpet.data.SummaryNameMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -102,6 +105,20 @@ public class homeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         habitlist = new summary();
+
+        List<Habit> allhab = getDb().habitDao().findAll();
+        for(int i=0;i<allhab.size();i++){
+            int k=0;
+            for (int q=0;q<habitlist.size();q++) {
+                if(allhab.get(i).getName().equals(habitlist.get(q))){
+                    habitlist.get(q).toggleFavorite();
+                    k++;
+                }
+            }
+            if(k==0){
+                habitlist.addhabit(allhab.get(i).getName());
+            }
+        }
         habitlist.setSelection("favourite");
 
         SummaryAdapter adapter = new SummaryAdapter(getActivity(), (ArrayList<SummaryNameMapping>) habitlist.getSelectedhabitList());

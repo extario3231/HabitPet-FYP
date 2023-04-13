@@ -5,7 +5,7 @@ import com.example.habitpet.data.SummaryNameMapping;
 import java.util.ArrayList;
 import java.util.List;
 
-public class summary {
+public class summary extends ArrayList<SummaryNameMapping>{
     private ArrayList<SummaryNameMapping> allhabits = new ArrayList<SummaryNameMapping>();
     // List of books for display in the items of gridview
     private ArrayList<SummaryNameMapping> selectedhabitList = new ArrayList<SummaryNameMapping>();
@@ -20,7 +20,6 @@ public class summary {
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Football");
-        summaryNameMapping.toggleFavorite();
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Basketball");
@@ -30,21 +29,18 @@ public class summary {
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Tennis");
-        summaryNameMapping.toggleFavorite();
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Table Tennis");
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Golf");
-        summaryNameMapping.toggleFavorite();
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Baseball");
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Gym");
-        summaryNameMapping.toggleFavorite();
         allhabits.add(summaryNameMapping);
 
         summaryNameMapping = new SummaryNameMapping("Drinking more water");
