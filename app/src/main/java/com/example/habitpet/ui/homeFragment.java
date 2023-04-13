@@ -217,6 +217,15 @@ public class homeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), CalendarDisplay.class);
+                List<Habit> habitList = getDb().habitDao().findAll();
+                for(int i=0;i<habitList.size();i++){
+                    Habit notWantedHabit = habitList.get(i);
+                    notWantedHabit.setWantedHabit(false);
+                    getDb().habitDao().update(notWantedHabit);
+                }
+                Habit habit = habitList.get(position);
+                habit.setWantedHabit(true);
+                getDb().habitDao().update(habit);
                 startActivity(intent);
             }
         });

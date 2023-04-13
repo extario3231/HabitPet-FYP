@@ -23,6 +23,8 @@ public class Habit {
     private String imagePath;
     @ColumnInfo(name = "is_builtin")
     private boolean isBuiltin;
+    @ColumnInfo(name= "is_wanted_habit")
+    private boolean isWantedHabit;
 
     public Habit(@NonNull String name, String startDate, String imagePath, boolean isBuiltin) {
         this.name = name;
@@ -69,5 +71,13 @@ public class Habit {
 
     public void setBuiltin(boolean builtin) {
         isBuiltin = builtin;
+    }
+
+    public boolean isWantedHabit() {
+        return isWantedHabit;
+    }
+
+    public void setWantedHabit(boolean wantedHabit) {
+        isWantedHabit = wantedHabit;
     }
 }

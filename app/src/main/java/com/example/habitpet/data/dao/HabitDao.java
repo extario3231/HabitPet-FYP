@@ -27,6 +27,8 @@ public interface HabitDao {
 
     @Query("SELECT * FROM habit WHERE start_date BETWEEN :startDate AND :endDate")
     List<Habit> findByPeriod(String startDate, String endDate);
+    @Query("SELECT name FROM habit WHERE is_wanted_habit = 1")
+    String findWantedHabit();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Habit> habits);

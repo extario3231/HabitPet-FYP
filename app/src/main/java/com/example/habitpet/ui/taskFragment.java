@@ -222,7 +222,7 @@ public class taskFragment extends Fragment {
             public void onClick(View view) {
                 if(aUri == null){
                     habitlist.addhabit(addHabitText.getText().toString());
-                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", false));
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", true));
                 }
                 else{
                     habitlist.addhabitwithimage(addHabitText.getText().toString(), aUri);

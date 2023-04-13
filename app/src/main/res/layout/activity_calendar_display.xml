@@ -6,22 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.CalendarDisplay">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/wantedHabitName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="5dp"
+        android:text="TextView"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:type="one_day_picker"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:eventsEnabled="true"
         app:headerColor="@color/babyblue"
-        app:todayLabelColor="#6dd5ed"
-        app:selectionLabelColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wantedHabitName"
         app:selectionColor="#90EE90"
-        app:eventsEnabled="true" />
+        app:selectionLabelColor="#FFFFFF"
+        app:todayLabelColor="#6dd5ed"
+        app:type="one_day_picker" />
 
     <Button
         android:id="@+id/button_SetTarget"

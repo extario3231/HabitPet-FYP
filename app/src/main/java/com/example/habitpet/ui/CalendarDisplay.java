@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,16 +35,18 @@ public class CalendarDisplay extends AppCompatActivity {
 
     private void setView() {
         Button btSetTarget, btClearTarget, btToday, btGetDay;
+        TextView tv = findViewById(R.id.wantedHabitName);
         CalendarView calendarView = findViewById(R.id.calendarView);
         btSetTarget = findViewById(R.id.button_SetTarget);
 
+        tv.setText(getDb().habitDao().findWantedHabit());
         List<EventDay> event = new ArrayList<>();
         ArrayList<Calendar> calendarArrayList = new ArrayList<>();
-        List<Integer> yearList = getDb().calendarProgressDao().findYear("test");
-        List<Integer> monthList = getDb().calendarProgressDao().findMonth("test");
-        List<Integer> dayList = getDb().calendarProgressDao().findDay("test");
+        List<Integer> yearList = getDb().calendarProgressDao().findYear(getDb().habitDao().findWantedHabit());
+        List<Integer> monthList = getDb().calendarProgressDao().findMonth(getDb().habitDao().findWantedHabit());
+        List<Integer> dayList = getDb().calendarProgressDao().findDay(getDb().habitDao().findWantedHabit());
 
-        for(int i=0;i<50;i++){
+        for(int i=0;i<100;i++){
             Calendar calendar = Calendar.getInstance();
             calendarArrayList.add(calendar);
         }
@@ -65,7 +68,7 @@ public class CalendarDisplay extends AppCompatActivity {
                 for (java.util.Calendar calendar : calendarView.getSelectedDates()) {
                     calendar.setTime(calendar.getTime());
                     getDb().calendarProgressDao().insert(
-                            new CalendarProgress("test",
+                            new CalendarProgress(getDb().habitDao().findWantedHabit(),
                                     calendar.get(Calendar.YEAR),
                                     calendar.get(Calendar.MONTH),
                                     calendar.get(Calendar.DATE))
