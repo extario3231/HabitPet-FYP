@@ -18,6 +18,11 @@
         android:layout_height="wrap_content"
         android:text="Sleep and wake up" />
 
+    <TextView
+        android:id="@+id/blank1"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <ImageButton
         android:id="@+id/tick"
