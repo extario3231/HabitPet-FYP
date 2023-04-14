@@ -44,6 +44,6 @@ public class NameMapping {
         isFavorite = true;
     }
 
-    public Uri getmUri() { return mUri; }
+    public Uri getmUri(){ return mUri; }
 
 }

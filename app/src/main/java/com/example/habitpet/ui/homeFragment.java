@@ -2,14 +2,9 @@ package com.example.habitpet.ui;
 
 
 import static com.example.habitpet.ui.MainActivity.getDb;
-import static com.example.habitpet.ui.taskFragment.getIsTaskCompleted;
-import static com.example.habitpet.ui.taskFragment.setIsTaskCompleted;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +20,10 @@ import androidx.fragment.app.Fragment;
 import com.example.habitpet.R;
 import com.example.habitpet.data.entity.Habit;
 import com.example.habitpet.data.entity.PetProgress;
-import com.example.habitpet.data.repo.PetProgressRepo;
 import com.example.habitpet.data.SummaryNameMapping;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 
 /**

@@ -32,16 +32,6 @@ public class SummaryAdapter extends ArrayAdapter<SummaryNameMapping>{
         default_text_view.setText(currentName.getHabitname());
 
 
-
-        /*addToFavorite.setOnCheckedChangeListener(
-                new CheckBox.OnCheckedChangeListener(){
-                    public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-                        currentName.toggleFavorite();
-                    }
-                }
-        );*/
-
-
         return listItemView;
     }
 
