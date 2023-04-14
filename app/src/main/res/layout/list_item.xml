@@ -8,14 +8,16 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="40dp"
-        android:layout_height="39dp"
+        android:layout_height="40dp"
         android:src="@mipmap/sleep" />
 
 
     <TextView
         android:id="@+id/default_text_view"
-        android:layout_width="140dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="casual"
         android:text="Sleep and wake up" />
 
     <TextView
@@ -43,9 +45,11 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:background="@drawable/buttonstyle4"
+        android:fontFamily="casual"
         android:text="Remove"
         android:textAllCaps="false"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

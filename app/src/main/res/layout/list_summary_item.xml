@@ -9,6 +9,7 @@
         android:id="@+id/default_text_view"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:fontFamily="casual"
         android:text="Sleep and wake up"
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"

@@ -109,7 +109,7 @@ public class taskFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState){
 
         super.onActivityCreated(savedInstanceState);
         habitlist = new habits();
@@ -295,18 +295,15 @@ public class taskFragment extends Fragment {
     public static void setIsTaskCompleted(boolean value) {
         isTaskCompleted = value;
     }
-    public static boolean getIsTaskFailed(){ return isTaskFailed; }
-    public static void setIsTaskFailed(boolean value){ isTaskFailed = value; }
 
     // this function is triggered when
     // the Select Image Button is clicked
-    public void imageChooser() {
+    public void imageChooser(){
 
         // create an instance of the
         // intent of the type image
-        Intent i = new Intent();
+        Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
 
         // pass the constant to compare it
         // with the returned requestCode

@@ -23,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:textAlignment="center"
+            android:fontFamily="casual"
             android:text="Quote for inspiration"
-            android:textSize="15dp"
+            android:textAlignment="center"
             android:textColor="#FF0000"
-            android:textStyle="italic"
-            android:fontFamily="monospace" />
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
 
         <ImageView
             android:id="@+id/petImageView"
@@ -41,8 +41,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="       Exp:"
-            android:textSize="17dp" />
+            android:layout_marginLeft="30dp"
+            android:fontFamily="casual"
+            android:text="Exp:"
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/determinateBar"
@@ -58,8 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="       Summary:"
-            android:textSize="17dp" />
+            android:layout_marginLeft="30dp"
+            android:fontFamily="casual"
+            android:text="Summary:"
+            android:textSize="17dp"
+            android:textStyle="bold" />
 
         <ListView
             android:id="@+id/summaryList"
@@ -75,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@drawable/buttonstyle1"
+        android:fontFamily="casual"
         android:text="Change Pet"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
