@@ -27,11 +27,11 @@ public class NextActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.homeItem:
+                switch(item.getTitle().toString()){
+                    case "Home":
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, homeFrag).commit();
                         return true;
-                    case R.id.taskItem:
+                    case "Task":
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, taskFrag).commit();
                         return true;
                 }
