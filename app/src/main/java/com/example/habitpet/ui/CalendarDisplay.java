@@ -42,6 +42,7 @@ public class CalendarDisplay extends AppCompatActivity {
         tv.setText(getDb().habitDao().findWantedHabit());
         List<EventDay> event = new ArrayList<>();
         ArrayList<Calendar> calendarArrayList = new ArrayList<>();
+
         List<Integer> yearList = getDb().calendarProgressDao().findYear(getDb().habitDao().findWantedHabit());
         List<Integer> monthList = getDb().calendarProgressDao().findMonth(getDb().habitDao().findWantedHabit());
         List<Integer> dayList = getDb().calendarProgressDao().findDay(getDb().habitDao().findWantedHabit());
@@ -59,7 +60,6 @@ public class CalendarDisplay extends AppCompatActivity {
             );
             event.add(new EventDay(calendarArrayList.get(j), R.drawable.ic_baseline_favorite_24));
         }
-
 
         calendarView.setEvents(event);
 

@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/quoteTextView"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
             android:fontFamily="casual"
             android:text="Quote for inspiration"
