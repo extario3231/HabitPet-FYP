@@ -50,8 +50,6 @@ public class taskFragment extends Fragment {
 
     // self-defined variables
     public habits habitlist;
-    private static boolean isTaskCompleted;
-    private static boolean isTaskFailed;
     AlertDialog dialog;
     AlertDialog dialog1;
     Button button;
@@ -288,12 +286,6 @@ public class taskFragment extends Fragment {
             }
         });
 
-    }
-    public static boolean getIsTaskCompleted() {
-        return isTaskCompleted;
-    }
-    public static void setIsTaskCompleted(boolean value) {
-        isTaskCompleted = value;
     }
 
     // this function is triggered when

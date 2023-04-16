@@ -222,13 +222,13 @@ public class homeFragment extends Fragment {
         });
     }
     public void generateQuote(){
-        quoteArrayList.add("Hard work beats talent when talent doesn’t work hard.");
-        quoteArrayList.add("I am who I am today because of the choices I made yesterday.");
-        quoteArrayList.add("Whatever we believe about ourselves and our ability comes true for us");
-        quoteArrayList.add("If you really look closely, most overnight successes took a long time.");
-        quoteArrayList.add("Setting goals is the first step in turning the invisible into the visible.");
-        quoteArrayList.add("Impossible is just an opinion.");
-        quoteArrayList.add("The greater the difficulty, the more the glory in surmounting it.");
+        quoteArrayList.add("Hard work beats talent when talent doesn’t work hard.   -Tim Notke");
+        quoteArrayList.add("I am who I am today because of the choices I made yesterday.    -Eleanor Roosevelt");
+        quoteArrayList.add("Whatever we believe about ourselves and our ability comes true for us   -Susan L. Taylor");
+        quoteArrayList.add("If you really look closely, most overnight successes took a long time.  -Steve Jobs");
+        quoteArrayList.add("Setting goals is the first step in turning the invisible into the visible.  -Tony Robbins");
+        quoteArrayList.add("Impossible is just an opinion.  -Paulo Coelho");
+        quoteArrayList.add("The greater the difficulty, the more the glory in surmounting it.   -Epictetus");
 
         quotetv = (TextView) getView().findViewById(R.id.quoteTextView);
         int quoteIndex = (int) (Math.random() * 6);

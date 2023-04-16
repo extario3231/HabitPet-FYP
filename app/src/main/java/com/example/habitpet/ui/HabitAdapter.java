@@ -1,10 +1,8 @@
 package com.example.habitpet.ui;
 
 import static com.example.habitpet.ui.MainActivity.getDb;
-import static com.example.habitpet.ui.taskFragment.setIsTaskCompleted;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +17,10 @@ import com.example.habitpet.R;
 import com.example.habitpet.data.NameMapping;
 import com.example.habitpet.data.entity.Habit;
 import com.example.habitpet.data.entity.PetProgress;
-import com.example.habitpet.data.repo.PetProgressRepo;
 
 import java.util.ArrayList;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
-
 public class HabitAdapter extends ArrayAdapter<NameMapping> {
-    private PetProgressRepo progressRepo = new PetProgressRepo(getDb());
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public HabitAdapter(Activity context, ArrayList<NameMapping> showhabitlist){
         super(context,0, showhabitlist);
@@ -61,13 +53,7 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
             public void onClick(View v) {
                 Toast.makeText(getContext(), "You gained 2 EXP for your pet!",
                         Toast.LENGTH_SHORT).show();
-//                Disposable updateProgress = progressRepo.getProgress().subscribe(p -> {
-//                           p.setProgress(p.getProgress() + 2);
-//                            Disposable disposable = progressRepo.update(p).subscribe(() -> Log.i(TAG, "progress updated."));
-//                            compositeDisposable.add(disposable);
-//                        }
 
-//                );
                 PetProgress pp = getDb().petProgressDao().findPetName("cat");
                 PetProgress pp2 = getDb().petProgressDao().findPetName("dog");
                 PetProgress pp3 = getDb().petProgressDao().findPetName("bird");
@@ -83,8 +69,6 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
                     pp3.setProgress(getDb().petProgressDao().findExp("bird")+2);
                     getDb().petProgressDao().updateProgress(pp3);
                 }
-//                compositeDisposable.add(updateProgress);
-                setIsTaskCompleted(true);
             }
         });
 
@@ -114,18 +98,11 @@ public class HabitAdapter extends ArrayAdapter<NameMapping> {
                     getDb().petProgressDao().updateProgress(pp3);
                 }
 
-                setIsTaskCompleted(false);
             }
         });
 
         return listItemView;
     }
-    /*
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-    }
-    */
+
 }
 

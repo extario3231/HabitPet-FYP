@@ -79,7 +79,7 @@ public class SetTime extends AppCompatActivity {
     private void notification_cannel(){
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             CharSequence name = "Hey! I am hungry!";
-            String description = "Finish the task and feed me!";
+            String description = "Feed me now!!!";
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("Notification",name,importance);
             channel.setDescription(description);
