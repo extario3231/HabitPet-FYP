@@ -115,6 +115,13 @@ public class habits extends ArrayList<NameMapping> {
         allhabits.add(nameMapping);
     }
 
+    public void addhabitwithimageid(String habit, int image){
+        NameMapping nameMapping;
+        nameMapping = new NameMapping(habit, image);
+        nameMapping.toggleFavorite();
+        allhabits.add(nameMapping);
+    }
+
     public void setfavor(int pos){
         NameMapping nameMapping = allhabits.get(pos);
         nameMapping.toggleFavorite();

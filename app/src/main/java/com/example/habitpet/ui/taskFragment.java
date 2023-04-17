@@ -114,19 +114,12 @@ public class taskFragment extends Fragment {
 
         List<Habit> allhab = getDb().habitDao().findAll();
         for(int i=0;i<allhab.size();i++){
-            int k=0;
-            for (int q=0;q<habitlist.size();q++) {
-                if(allhab.get(i).getName().equals(habitlist.get(q))){
-                    habitlist.get(q).toggleFavorite();
-                    k++;
-                }
-            }
-            if(k==0){
-                if(allhab.get(i).getImagePath()!=null)
-                    habitlist.addhabitwithimage(allhab.get(i).getName(), Uri.parse(allhab.get(i).getImagePath()));
-                else
-                    habitlist.addhabit(allhab.get(i).getName());
-            }
+            if(allhab.get(i).getImagePath()!=null)
+                habitlist.addhabitwithimage(allhab.get(i).getName(), Uri.parse(allhab.get(i).getImagePath()));
+            else if (allhab.get(i).getImagePath_id()!=0)
+                habitlist.addhabitwithimageid(allhab.get(i).getName(), allhab.get(i).getImagePath_id());
+            else
+                habitlist.addhabit(allhab.get(i).getName());
         }
         habitlist.setSelection("favourite");
 
@@ -146,6 +139,11 @@ public class taskFragment extends Fragment {
                 false, false, false, false, false,
                 false, false, false, false, false,
                 false, false, false, false, false};
+        int[] habpath = {R.mipmap.sleep,R.mipmap.sport,R.mipmap.football,R.mipmap.basketball,
+                R.mipmap.badminton,R.mipmap.tennis,R.mipmap.tabletennis,R.mipmap.golf,
+                R.mipmap.baseball,R.mipmap.gym,R.mipmap.yoga,R.mipmap.water,
+                R.mipmap.food, R.mipmap.lazy,R.mipmap.trackspending,R.mipmap.checkemail,
+                R.mipmap.nosmoke,R.mipmap.noalcohol,R.mipmap.nosoda,R.mipmap.nosweets};
         ArrayList<Integer> change = new ArrayList<Integer>();
 
         builder1.setMultiChoiceItems(hab, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
@@ -163,7 +161,7 @@ public class taskFragment extends Fragment {
                 // user clicked OK
                 for (int i = 0;i<change.size();i++){
                     habitlist.setfavor(change.get(i));
-                    getDb().habitDao().insert(new Habit(hab[change.get(i)], "", "", false));
+                    getDb().habitDao().insert(new Habit(hab[change.get(i)], "", habpath[change.get(i)], false));
                 }
                 habitlist.setSelection("favourite");
                 HabitAdapter adapter = new HabitAdapter(getActivity(), (ArrayList<NameMapping>) habitlist.getSelectedhabitList());
@@ -220,7 +218,7 @@ public class taskFragment extends Fragment {
             public void onClick(View view) {
                 if(aUri == null){
                     habitlist.addhabit(addHabitText.getText().toString());
-                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", "", true));
+                    getDb().habitDao().insert(new Habit(addHabitText.getText().toString(), "", R.mipmap.custom, true));
                 }
                 else{
                     habitlist.addhabitwithimage(addHabitText.getText().toString(), aUri);

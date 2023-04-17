@@ -16,6 +16,8 @@ public class Habit {
     private String startDate;
     @ColumnInfo(name = "image_path")
     private String imagePath;
+    @ColumnInfo(name = "image_path_ID")
+    private int imagePath_id;
     @ColumnInfo(name = "is_builtin")
     private boolean isBuiltin;
     @ColumnInfo(name= "is_wanted_habit")
@@ -25,6 +27,13 @@ public class Habit {
         this.name = name;
         this.startDate = startDate;
         this.imagePath = imagePath;
+        this.isBuiltin = isBuiltin;
+    }
+
+    public Habit(@NonNull String name, String startDate, int imagePath, boolean isBuiltin) {
+        this.name = name;
+        this.startDate = startDate;
+        this.imagePath_id = imagePath;
         this.isBuiltin = isBuiltin;
     }
 
@@ -58,6 +67,14 @@ public class Habit {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public int getImagePath_id() {
+        return imagePath_id;
+    }
+
+    public void setImagePath_id(int imagePath) {
+        this.imagePath_id = imagePath;
     }
 
     public boolean isBuiltin() {
